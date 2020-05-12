@@ -1,0 +1,17 @@
+{
+  "name": "diary-mobile",
+  "displayName": "diary-mobile",
+  "expo": {
+    "name": "diary-mobile",
+    "slug": "diary-mobile",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
