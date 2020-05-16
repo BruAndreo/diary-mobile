@@ -6,7 +6,7 @@ export default function Login(props) {
         <View>
             <Text>Olá Login</Text>
             <Button
-                title='Go to Home' 
+                title='Go to Home'
                 onPress={() => props.navigation.navigate('Home')} />
         </View>
     );
