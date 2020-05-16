@@ -1,20 +1,9 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+
+import AuthRoute from './src/routes/AuthRoute';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello Diary</Text>
-    </View>
-  );
+  return <AuthRoute />
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
