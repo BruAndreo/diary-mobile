@@ -1,77 +1,89 @@
-import React from 'react';
-import { View, Image, TextInput, TouchableOpacity, Text, StyleSheet, StatusBar } from 'react-native';
-
+import React, { Component } from 'react';
+import { View, Image, TextInput, TouchableOpacity, Text, StatusBar } from 'react-native';
+import { Styles } from './Style';
+import Authentication from '../../app/Authentication';
 import LogoPath from '../../assets/diary-logo-claro.png';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#123456',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logo: {
-    resizeMode: 'stretch',
-    width: 300,
-    height: 150,
-    marginBottom: 50
-  },
-  input: {
-    width: 250,
-    height: 35,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    marginBottom: 10,
-    borderRadius: 4,
-    padding: 10
-  },
-  button: {
-    width: 250,
-    height: 35,
-    backgroundColor: '#00cc00',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-    marginTop: 10,
-    borderRadius: 4
-  },
-  textButton: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16
+class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.props = props;
   }
-});
 
-export default function Login(props) {
+  state = {
+    login: '',
+    password: '',
+    error: false,
+    errorMsg: ''
+  };
+
+  handleUserInput = text => {
+    this.setState({ login: text });
+  };
+
+  handlePasswordInput = text => {
+    this.setState({ password: text });
+  };
+
+  validateInputs = () => {
+    if (this.state.login.length === 0 || this.state.password.length === 0) {
+      throw new Error('Os campos devem estar preenchidos');
+    }
+  };
+
+  loginClicked = () => {
+    try {
+      this.validateInputs();
+
+      let logged = Authentication.authenticate(this.state.login, this.state.password);
+
+      if (logged) {
+        this.props.navigation.navigate('Home');
+      }
+    }
+    catch (e) {
+      this.setState({
+        error: true,
+        errorMsg: e.message
+      });
+    }
+  };
+
+  render() {
     return (
-        <>
-          <StatusBar barStyle="light-content" backgroundColor="#123456" />
-          <View style={styles.container}>
-            <Image
-              source={LogoPath}
-              style={styles.logo}
-            />
+      <>
+        <StatusBar barStyle="light-content" backgroundColor="#123456" />
+        <View style={Styles.container}>
+          <Image
+            source={LogoPath}
+            style={Styles.logo}
+          />
 
-            <TextInput
-              placeholder="User"
-              autoCapitalize="none"
-              autoCompleteType="off"
-              style={styles.input}
-            />
+          <TextInput
+            placeholder="User"
+            autoCapitalize="none"
+            autoCompleteType="off"
+            style={Styles.input}
+            onChangeText={this.handleUserInput}
+          />
 
-            <TextInput
-              placeholder="Password"
-              secureTextEntry
-              style={styles.input}
-            />
+          <TextInput
+            placeholder="Password"
+            secureTextEntry
+            style={Styles.input}
+            onChangeText={this.handlePasswordInput}
+          />
 
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.textButton}>Entrar</Text>
-            </TouchableOpacity>
-          </View>
-        </>
-    );
+          <TouchableOpacity style={Styles.button} onPress={this.loginClicked}>
+            <Text style={Styles.textButton}>Entrar</Text>
+          </TouchableOpacity>
+
+          <Text style={Styles.msgErro}>{this.state.errorMsg}</Text>
+        </View>
+      </>
+  );
+  }
 }
+
+export default Login;
