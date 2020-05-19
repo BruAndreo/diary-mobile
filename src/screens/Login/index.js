@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, TextInput, TouchableOpacity, Text, StatusBar } from 'react-native';
 import { Styles } from './Style';
+import Screens from '../../lib/Screens';
 import Authentication from '../../app/Authentication';
 import LogoPath from '../../assets/diary-logo-claro.png';
 
@@ -39,7 +40,7 @@ class Login extends Component {
       let logged = Authentication.authenticate(this.state.login, this.state.password);
 
       if (logged) {
-        this.props.navigation.navigate('DrawerRoute');
+        this.props.navigation.navigate(Screens.drawerMenu);
       }
     }
     catch (e) {

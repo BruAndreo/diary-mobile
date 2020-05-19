@@ -1,4 +1,5 @@
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import Screens from '../lib/Screens';
 
 import Login from '../screens/Login';
 import Home from '../screens/Home';
@@ -10,7 +11,7 @@ const authRoute = createSwitchNavigator({
     DrawerRoute
 },
 {
-    initialRouteName: 'Login'
+    initialRouteName: Screens.login
 });
 
 export default createAppContainer(authRoute);
