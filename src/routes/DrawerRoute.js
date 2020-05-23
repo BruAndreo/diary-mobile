@@ -9,6 +9,7 @@ import MenuLateral from '../components/MenuLateral';
 
 import Home from '../screens/Home';
 import Login from '../screens/Login';
+import HomeRoute from './HomeRoute';
 
 Icon.loadFont();
 
@@ -22,7 +23,7 @@ const ItemIcon = (props) => (<Icon name={props.name} size={22} color={Colors.whi
 
 export default createDrawerNavigator({
   Home: {
-    screen: Home,
+    screen: HomeRoute,
     navigationOptions: () => ({
       drawerIcon: <ItemIcon name="home" />,
       drawerLabel: <Item name="Tela Inicial" />
