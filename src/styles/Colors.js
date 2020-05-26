@@ -7,6 +7,8 @@ const Colors = {
   white: '#FFF',
   cinza: '#eee',
   primaryDark:  '#0a1f33',
+  cinzaEscuro: '#afafaf',
+  azulClaro: '#bcd8e0',
 };
 
 export default Colors;

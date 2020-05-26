@@ -22,7 +22,7 @@ export default createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: ({ navigation }) => ({
-      title: 'Tela Inicial',
+      title: 'Agenda do dia',
       drawerLockMode: 'unlocked',
       headerLeft: () => <MenuIcon navigation={navigation} />
     })

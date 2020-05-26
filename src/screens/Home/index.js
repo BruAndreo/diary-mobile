@@ -1,13 +1,36 @@
-import React from 'react';
-import { View, Text, Button } from 'react-native';
+import React, { Component } from 'react';
+import { View } from 'react-native';
 
-export default function Home(props) {
+import WeekCalendar from '../../components/WeekCalendar';
+import WeekCalendarRules from '../../app/WeekCalendarRules';
+
+class Home extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.props = props;
+  }
+
+  state = {
+    weekDays: []
+  };
+
+  componentDidMount = () => {
+    const weekCalendar = new WeekCalendarRules();
+
+    this.setState({
+      weekDays: weekCalendar.getDaysOfWeek()
+    });
+  }
+
+  render() {
     return (
-        <View>
-            <Text>Olá Home</Text>
-            <Button
-                title='Go to Login' 
-                onPress={() => props.navigation.navigate('Login')} />
-        </View>
+      <View>
+        <WeekCalendar days={this.state.weekDays} />
+      </View>
     );
+  }
 }
+
+export default Home;
