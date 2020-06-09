@@ -2,6 +2,7 @@ import moment from "moment";
 import TypesCompromissos from '../lib/TiposDeCompromissos';
 
 export default [{
+    id: '1',
     type: TypesCompromissos.MEETING,
     at: moment('2020-05-27 15:00:00'),
     nomeEmpresa: "Impacta",
@@ -15,6 +16,7 @@ export default [{
     },
   },
   {
+    id: '2',
     type: TypesCompromissos.VISIT,
     at: moment('2020-05-27 16:00:00'),
     nomeEmpresa: "Impacta",

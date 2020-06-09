@@ -4,6 +4,8 @@ import { View } from 'react-native';
 import WeekCalendar from '../../components/WeekCalendar';
 import WeekCalendarRules from '../../app/WeekCalendarRules';
 
+import CompromissosList from '../../components/CompromissosList';
+
 class Home extends Component {
 
   constructor(props) {
@@ -28,6 +30,8 @@ class Home extends Component {
     return (
       <View>
         <WeekCalendar days={this.state.weekDays} />
+
+        <CompromissosList />
       </View>
     );
   }
