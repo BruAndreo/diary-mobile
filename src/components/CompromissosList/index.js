@@ -20,7 +20,7 @@ class CompromissosList extends Component {
     this.setCompromissos = this.setCompromissos.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setCompromissos();
   }
 
