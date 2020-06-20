@@ -9,6 +9,8 @@ const Colors = {
   primaryDark:  '#0a1f33',
   cinzaEscuro: '#afafaf',
   azulClaro: '#bcd8e0',
+  amareloReuniao: '#FFCA33',
+  verdeVisita: '#5EC38E'
 };
 
 export default Colors;

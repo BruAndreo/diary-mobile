@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList } from 'react-native';
+import moment from 'moment';
 
 import Styles from './style';
 import Compromissos from '../../app/Compromissos';
@@ -16,6 +17,8 @@ class CompromissosList extends Component {
     super(props);
 
     this.props = props;
+
+    moment.locale('pt-br');
 
     this.setCompromissos = this.setCompromissos.bind(this);
   }
@@ -42,7 +45,15 @@ class CompromissosList extends Component {
           contentContainerStyle={Styles.lista}
           data={this.state.compromissos}
           renderItem={({item}, idx) => (
-            <CompromissoCard key={idx} nomeResponsavel={item.nomeResponsavel} nomeEmpresa={item.nomeEmpresa}/>
+            <CompromissoCard
+              key={idx}
+              nomeResponsavel={item.nomeResponsavel}
+              nomeEmpresa={item.nomeEmpresa}
+              type={item.type}
+              endereco={`${item.address.street}, ${item.address.number} - ${item.address.city}/${item.address.uf}`}
+              dia={moment().isSame(item.at, 'day') ? 'Hoje' : item.at.format('D/MM')}
+              horario={item.at.format('LT')}
+            />
           )}
           ListEmptyComponent={<View><Text>Você não possui compromissos</Text></View>}
         />
