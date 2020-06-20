@@ -30,6 +30,8 @@ const Styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: Colors.primaryDark,
   },
   day: {
     fontSize: 20,

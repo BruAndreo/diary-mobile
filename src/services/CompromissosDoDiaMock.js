@@ -45,6 +45,20 @@ export default [
       uf: "SP",
     },
   },
+  {
+    id: '20',
+    type: TypesCompromissos.MEETING,
+    at: moment().day(1).hour({hour:19, minute:0, second:0, millisecond:0}),
+    nomeEmpresa: "Banco Luso",
+    nomeResponsavel: "Carlos",
+    address: {
+      cep: "09990730",
+      street: "Av. Paulista",
+      number: "1234",
+      city: "São Paulo",
+      uf: "SP",
+    },
+  },
   //terça
   {
     id: '4',
