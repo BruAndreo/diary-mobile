@@ -6,7 +6,8 @@ import CalendarItem from './CalendarItem';
 export default WeekCalendar = (props) => {
   return (
     <View style={Styles.calendar}>
-      {props.days.map((i, idx) => <CalendarItem key={idx} day={i.day} weekDay={i.weekDay} selected={i.isToday} />)}
+      {/* Alterar quando houver um toque nesta porra */}
+      {props.days.map((i, idx) => <CalendarItem key={idx} day={i.day} weekDay={i.weekDay} selected={i.isToday} handleTouch={props.handleTouch} />)}
     </View>
   );
 }

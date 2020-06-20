@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import Colors from '../../styles/Colors';
 
-export default CalendarItem = ({ day, weekDay, selected }) => {
+export default CalendarItem = ({ day, weekDay, selected, handleTouch }) => {
   return (
-    <View style={selected ? Styles.today : Styles.item}>
+    <TouchableOpacity style={selected ? Styles.today : Styles.item} onPress={() => handleTouch(day)}>
       <Text style={Styles.day}>{day}</Text>
       <Text style={Styles.weekDay}>{weekDay}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 

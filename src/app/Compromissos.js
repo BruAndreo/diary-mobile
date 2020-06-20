@@ -1,3 +1,4 @@
+import moment from 'moment';
 import CompromissosDoDiaMock from '../services/CompromissosDoDiaMock';
 
 class Compromissos {
@@ -8,6 +9,12 @@ class Compromissos {
     }
 
     return CompromissosDoDiaMock.filter(compromisso => compromisso.type === type);
+  }
+
+  getCompromissosByDate(date) {
+    const dt = moment(date);
+
+    return CompromissosDoDiaMock.filter(compromisso => dt.isSame(compromisso.at, 'day'));
   }
 
 }

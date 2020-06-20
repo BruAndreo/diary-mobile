@@ -1,31 +1,33 @@
+import moment from 'moment';
+
 export default class WeekCalendarRules {
 
   getDaysOfWeek() {
     return [
       {
-        day: 25,
+        day: moment().day(1).date(),
         weekDay: 'Seg',
-        isToday: true
+        isToday: moment().day(1).isSame(moment(), 'day')
       },
       {
-        day: 26,
+        day: moment().day(2).date(),
         weekDay: 'Ter',
-        isToday: false
+        isToday: moment().day(2).isSame(moment(), 'day')
       },
       {
-        day: 27,
+        day: moment().day(3).date(),
         weekDay: 'Qua',
-        isToday: false
+        isToday: moment().day(3).isSame(moment(), 'day')
       },
       {
-        day: 28,
+        day: moment().day(4).date(),
         weekDay: 'Qui',
-        isToday: false
+        isToday: moment().day(4).isSame(moment(), 'day')
       },
       {
-        day: 29,
+        day: moment().day(5).date(),
         weekDay: 'Sex',
-        isToday: false
+        isToday: moment().day(5).isSame(moment(), 'day')
       },
     ];
   }

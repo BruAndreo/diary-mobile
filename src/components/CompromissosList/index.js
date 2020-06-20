@@ -16,12 +16,23 @@ class CompromissosList extends Component {
     super(props);
 
     this.props = props;
+
+    this.setCompromissos = this.setCompromissos.bind(this);
   }
 
-  componentDidMount() {
-    const compromissos = new Compromissos();
+  componentWillMount() {
+    this.setCompromissos();
+  }
 
-    this.setState({ compromissos: compromissos.getCompromissos() });
+  componentDidUpdate(prevProps) {
+    if (prevProps.date !== this.props.date) {
+      this.setCompromissos();
+    }
+  }
+
+  setCompromissos() {
+    const compromissos = new Compromissos();
+    this.setState({ compromissos: compromissos.getCompromissosByDate(this.props.date) });
   }
 
   render() {
