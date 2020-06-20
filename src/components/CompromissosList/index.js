@@ -44,6 +44,7 @@ class CompromissosList extends Component {
           renderItem={({item}, idx) => (
             <CompromissoCard key={idx} nomeResponsavel={item.nomeResponsavel} nomeEmpresa={item.nomeEmpresa}/>
           )}
+          ListEmptyComponent={<View><Text>Você não possui compromissos</Text></View>}
         />
       </View>
     );
