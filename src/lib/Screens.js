@@ -1,7 +1,11 @@
 const Screens = {
   login: 'Login',
   drawerMenu: 'DrawerRoute',
-  home: 'Home'
+  home: 'Home',
+  visitas: 'Visitas',
+  reunioes: 'Reunioes',
+  sincronizacao: 'Sincronizacao',
+  ajuda: 'Ajuda'
 };
 
 export default Screens;

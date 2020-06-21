@@ -7,9 +7,12 @@ import Screens from '../lib/Screens';
 import Colors from '../styles/Colors';
 import MenuLateral from '../components/MenuLateral';
 
-import Home from '../screens/Home';
 import Login from '../screens/Login';
 import HomeRoute from './HomeRoute';
+import VisitasRoute from './VisitasRoute';
+import ReunioesRoute from './ReunioesRoute';
+import SincronizacaoRoute from './SincronizacaoRoute';
+import Ajuda from '../screens/Ajuda';
 
 Icon.loadFont();
 
@@ -30,28 +33,28 @@ export default createDrawerNavigator({
     }),
   },
   Visitas: {
-    screen: Home,
+    screen: VisitasRoute,
     navigationOptions: () => ({
       drawerIcon: <ItemIcon name="location-city" />,
       drawerLabel: <Item name="Visitas" />
     }),
   },
   Reunioes: {
-    screen: Home,
+    screen: ReunioesRoute,
     navigationOptions: () => ({
       drawerIcon: <ItemIcon name="work" />,
       drawerLabel: <Item name="Reuniões" />
     }),
   },
   Sincronizacao: {
-    screen: Home,
+    screen: SincronizacaoRoute,
     navigationOptions: () => ({
       drawerIcon: <ItemIcon name="sync" />,
       drawerLabel: <Item name="Sincronização" />
     }),
   },
   Ajuda: {
-    screen: Home,
+    screen: Ajuda,
     navigationOptions: () => ({
       drawerIcon: <ItemIcon name="help" />,
       drawerLabel: <Item name="Ajuda" />
