@@ -58,7 +58,7 @@ class CompromissosList extends Component {
               type={item.type}
               endereco={`${item.address.street}, ${item.address.number} - ${item.address.city}/${item.address.uf}`}
               dia={moment().isSame(item.at, 'day') ? 'Hoje' : item.at.format('D/MM')}
-              horario={item.at.format('LT')}
+              horario={item.hour}
             />
           )}
           ListEmptyComponent={<View><Text>Você não possui compromissos</Text></View>}
