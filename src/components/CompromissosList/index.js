@@ -24,7 +24,7 @@ class CompromissosList extends Component {
   }
 
   componentDidMount() {
-    this.setCompromissos();
+    this.setCompromissos(this.props.type);
   }
 
   componentDidUpdate(prevProps) {
@@ -33,9 +33,15 @@ class CompromissosList extends Component {
     }
   }
 
-  setCompromissos() {
+  setCompromissos(type = null) {
     const compromissos = new Compromissos();
-    this.setState({ compromissos: compromissos.getCompromissosByDate(this.props.date) });
+
+    if (!type) {
+      this.setState({ compromissos: compromissos.getCompromissosByDate(this.props.date) });
+    } else {
+      this.setState({ compromissos: compromissos.getCompromissos(type) });
+    }
+
   }
 
   render() {
