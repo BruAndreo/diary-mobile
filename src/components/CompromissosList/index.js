@@ -62,6 +62,7 @@ class CompromissosList extends Component {
             />
           )}
           ListEmptyComponent={<View><Text>Você não possui compromissos</Text></View>}
+          ListFooterComponent={() => <View style={{ height: 200 }}></View>}
         />
       </View>
     );
