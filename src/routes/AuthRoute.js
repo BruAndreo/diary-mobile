@@ -1,9 +1,15 @@
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import Login from '../screens/Login';
+import DrawerRoute from './DrawerRoute';
+
+/*
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
 import Screens from '../lib/Screens';
 
-import Login from '../screens/Login';
 import Home from '../screens/Home';
-import DrawerRoute from './DrawerRoute';
 
 const authRoute = createSwitchNavigator({
     Login,
@@ -15,3 +21,17 @@ const authRoute = createSwitchNavigator({
 });
 
 export default createAppContainer(authRoute);
+*/
+
+const Stack = createStackNavigator();
+
+export default function authRoute() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Login' >
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="drawerRoute" component={DrawerRoute} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}

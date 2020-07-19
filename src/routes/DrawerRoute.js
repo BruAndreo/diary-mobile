@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator, DrawerRouter } from 'react-navigation-drawer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Screens from '../lib/Screens';
 import Colors from '../styles/Colors';
 import MenuLateral from '../components/MenuLateral';
-
+import Home from '../screens/Home';
 import Login from '../screens/Login';
 import HomeRoute from './HomeRoute';
 import VisitasRoute from './VisitasRoute';
@@ -16,6 +16,22 @@ import Ajuda from '../screens/Ajuda';
 
 Icon.loadFont();
 
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import CustomDrawerContent from './DrawerCustom';
+
+const Drawer = createDrawerNavigator();
+
+export default function DrawerRouter () {
+  return (
+    <Drawer.Navigator
+      drawerContent={props => <CustomDrawerContent {...props} />}
+    >
+      <Drawer.Screen name='Tela Inicial' component={Home} />
+    </Drawer.Navigator>
+  );
+}
+
+/*
 const Item = (props) => (
   <View style={{ height: 60, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
     <Text style={{ color: Colors.white, fontSize: 18 }}>{props.name}</Text>
