@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { createDrawerNavigator, DrawerRouter } from 'react-navigation-drawer';
+//import { createDrawerNavigator, DrawerRouter } from 'react-navigation-drawer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Screens from '../lib/Screens';
@@ -88,3 +88,4 @@ export default createDrawerNavigator({
   initialRouteName: Screens.home,
   drawerType: 'slide',
 });
+*/
