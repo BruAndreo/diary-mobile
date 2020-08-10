@@ -40,7 +40,7 @@ class Login extends Component {
       let logged = Authentication.authenticate(this.state.login, this.state.password);
 
       if (logged) {
-        this.props.navigation.navigate(Screens.drawerMenu);
+        this.props.navigation.replace(Screens.drawerMenu);
       }
     }
     catch (e) {

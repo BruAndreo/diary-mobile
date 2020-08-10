@@ -26,7 +26,7 @@ export default function DrawerRouter () {
     <Drawer.Navigator
       drawerContent={props => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name='Tela Inicial' component={Home} />
+      <Drawer.Screen name='Inicio' component={Home} options={{ title: 'Tela inicial' }} />
     </Drawer.Navigator>
   );
 }

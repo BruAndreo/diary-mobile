@@ -29,8 +29,8 @@ export default function authRoute() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login' >
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="drawerRoute" component={DrawerRoute} />
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="DrawerRoute" component={DrawerRoute} options={{ title: 'Tela inicial' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
