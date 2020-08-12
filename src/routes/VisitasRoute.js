@@ -40,13 +40,14 @@ export default createStackNavigator({
 */
 
 import { createStackNavigator } from '@react-navigation/stack';
+import headerStyled from '../components/Menu/HeaderStyled';
 
 const Stack = createStackNavigator();
 
 export default function VisitasRoute() {
   return (
     <Stack.Navigator initialRouteName='Visitas'>
-      <Stack.Screen name="Visitas" component={Visitas} options={{ headerShown: true, title: 'Visitas' }} />
+      <Stack.Screen name="Visitas" component={Visitas} options={({navigation}) => headerStyled(navigation, 'Visitas')} />
     </Stack.Navigator>
   );
 }

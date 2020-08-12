@@ -40,13 +40,14 @@ export default createStackNavigator({
 */
 
 import { createStackNavigator } from '@react-navigation/stack';
+import headerStyled from '../components/Menu/HeaderStyled';
 
 const Stack = createStackNavigator();
 
 export default function SincronizacaoRoute() {
   return (
     <Stack.Navigator initialRouteName='Sincronizacao'>
-      <Stack.Screen name="Sincronizacao" component={Sincronizacao} options={{ headerShown: true, title: 'Sincronizacões' }} />
+      <Stack.Screen name="Sincronizacao" component={Sincronizacao} options={({navigation}) => headerStyled(navigation, 'Sincronizações')} />
     </Stack.Navigator>
   );
 }

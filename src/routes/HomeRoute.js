@@ -6,9 +6,9 @@ import Screens from '../lib/Screens';
 import Colors from '../styles/Colors';
 
 import Home from '../screens/Home';
-/*
-Icon.loadFont();
 
+Icon.loadFont();
+/*
 const MenuIcon = (props) => (
   <>
     <StatusBar barStyle="light-content" backgroundColor="#123456" />
@@ -40,13 +40,14 @@ export default createStackNavigator({
 */
 
 import { createStackNavigator } from '@react-navigation/stack';
+import headerStyled from '../components/Menu/HeaderStyled';
 
 const Stack = createStackNavigator();
 
 export default function HomeRoute() {
   return (
     <Stack.Navigator initialRouteName='Home'>
-      <Stack.Screen name="Home" component={Home} options={{ headerShown: true, title: 'Tela Inicial' }} />
+      <Stack.Screen name="Home" component={Home} options={({navigation}) => headerStyled(navigation, 'Tela Inicial')} />
     </Stack.Navigator>
   );
 }
