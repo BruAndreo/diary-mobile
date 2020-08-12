@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
+//import { createStackNavigator } from 'react-navigation-stack';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Screens from '../lib/Screens';
 import Colors from '../styles/Colors';
@@ -8,7 +8,7 @@ import Colors from '../styles/Colors';
 import Reunioes from '../screens/Reunioes';
 
 Icon.loadFont();
-
+/*
 const MenuIcon = (props) => (
   <>
     <StatusBar barStyle="light-content" backgroundColor="#123456" />
@@ -37,3 +37,16 @@ export default createStackNavigator({
     headerTintColor: Colors.white,
   },
 });
+*/
+
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+export default function ReunioesRoute() {
+  return (
+    <Stack.Navigator initialRouteName='Reunioes'>
+      <Stack.Screen name="Reunioes" component={Reunioes} options={{ headerShown: true, title: 'Reuniões' }} />
+    </Stack.Navigator>
+  );
+}

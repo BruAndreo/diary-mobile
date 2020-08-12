@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
+//import { createStackNavigator } from 'react-navigation-stack';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Screens from '../lib/Screens';
 import Colors from '../styles/Colors';
 
 import Home from '../screens/Home';
-
+/*
 Icon.loadFont();
 
 const MenuIcon = (props) => (
@@ -37,3 +37,16 @@ export default createStackNavigator({
     headerTintColor: Colors.white,
   },
 });
+*/
+
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+export default function HomeRoute() {
+  return (
+    <Stack.Navigator initialRouteName='Home'>
+      <Stack.Screen name="Home" component={Home} options={{ headerShown: true, title: 'Tela Inicial' }} />
+    </Stack.Navigator>
+  );
+}

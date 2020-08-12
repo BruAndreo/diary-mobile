@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
+//import { createStackNavigator } from 'react-navigation-stack';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Screens from '../lib/Screens';
 import Colors from '../styles/Colors';
 
-import Home from '../screens/Home';
 import Sincronizacao from '../screens/Sincronizacao';
-
+/*
 Icon.loadFont();
 
 const MenuIcon = (props) => (
@@ -38,3 +37,16 @@ export default createStackNavigator({
     headerTintColor: Colors.white,
   },
 });
+*/
+
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+export default function SincronizacaoRoute() {
+  return (
+    <Stack.Navigator initialRouteName='Sincronizacao'>
+      <Stack.Screen name="Sincronizacao" component={Sincronizacao} options={{ headerShown: true, title: 'Sincronizacões' }} />
+    </Stack.Navigator>
+  );
+}

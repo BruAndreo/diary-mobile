@@ -26,7 +26,12 @@ export default function DrawerRouter () {
     <Drawer.Navigator
       drawerContent={props => <CustomDrawerContent {...props} />}
     >
-      <Drawer.Screen name='Inicio' component={Home} options={{ title: 'Tela inicial' }} />
+      <Drawer.Screen name='Inicio' component={HomeRoute} options={{ title: 'Tela inicial' }} />
+      <Drawer.Screen name='Visitas' component={VisitasRoute} options={{ title: 'Visitas' }} />
+      <Drawer.Screen name='Reunioes' component={ReunioesRoute} options={{ title: 'Reuniões' }} />
+      <Drawer.Screen name='Sincronizações' component={SincronizacaoRoute} options={{ title: 'Sincronizações' }} />
+      <Drawer.Screen name='Ajuda' component={Ajuda} options={{ title: 'Ajuda' }} />
+      <Drawer.Screen name='Login' component={Login} options={{ title: 'Sair' }} />
     </Drawer.Navigator>
   );
 }
