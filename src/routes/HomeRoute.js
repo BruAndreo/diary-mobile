@@ -10,7 +10,7 @@ export default function HomeRoute() {
   return (
     <Stack.Navigator initialRouteName='Home'>
       <Stack.Screen name="Home" component={Home} options={({navigation}) => headerStyled(navigation, 'Tela Inicial')} />
-      <Stack.Screen name="Detalhes" component={Detalhes} options={({navigation}) => headerStyled(navigation, 'Detalhes')} />
+      <Stack.Screen name="Detalhes" component={Detalhes} options={({navigation}) => headerStyled(navigation, 'Detalhes', false)} />
     </Stack.Navigator>
   );
 }
