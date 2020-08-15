@@ -1,16 +1,17 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import Style from './style';
 import TypesCompromissos from '../../lib/TiposDeCompromissos';
 import Colors from '../../styles/Colors';
+import { useNavigation } from '@react-navigation/native';
 
-export default CompromissoCard = (props) => {
+export default CompromissoCard = props => {
   const isVisit = props.type === TypesCompromissos.VISIT;
+  const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => console.info(props)}>
+    <TouchableOpacity onPress={() => navigation.push('Detalhes')}>
       <View style={isVisit ? Style.cardVisit : Style.cardMeeting}>
         <View style={isVisit ? Style.headerVisit : Style.headerMeeting}>
           <Text style={Style.textHeader}>{isVisit ? 'Visita' : 'Reunião'}</Text>
