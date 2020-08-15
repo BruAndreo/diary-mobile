@@ -53,6 +53,7 @@ class CompromissosList extends Component {
           renderItem={({item}, idx) => (
             <CompromissoCard
               key={idx}
+              id={item.id}
               nomeResponsavel={item.nomeResponsavel}
               nomeEmpresa={item.nomeEmpresa}
               type={item.type}
