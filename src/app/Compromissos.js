@@ -17,6 +17,10 @@ class Compromissos {
     return CompromissosDoDiaMock.filter(compromisso => dt.isSame(compromisso.at, 'day'));
   }
 
+  getCompromissoById(id) {
+    return CompromissosDoDiaMock.find(compromisso => compromisso.id === id);
+  }
+
 }
 
 export default Compromissos;
