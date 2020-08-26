@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import { Styles } from './style';
@@ -90,12 +90,11 @@ class Detalhes extends Component {
           </View>
 
           <View>
-            <Text>Ir com...</Text>
+            <TouchableOpacity style={Styles.button}>
+              <Text style={Styles.textButton}>{this.isVisit() ? 'Preencher formulário' : 'Concluída'}</Text>
+            </TouchableOpacity>
           </View>
 
-          <View>
-            <Text>Formulário ou Anotações</Text>
-          </View>
         </View>
       </View>
     );
