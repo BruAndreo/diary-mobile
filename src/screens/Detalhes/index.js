@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
+import { useNavigation } from '@react-navigation/native';
 import { Styles } from './style';
 import Compromissos from '../../app/Compromissos';
 import TypesCompromissos from '../../lib/TiposDeCompromissos';
@@ -41,6 +42,13 @@ class Detalhes extends Component {
 
   getEndereco(address) {
     return `${address.street}, ${address.number} - ${address.cep} \n ${address.city}/${address.uf}`;
+  }
+
+  handleClickMainButton(isVisit) {
+    const screenName = isVisit ? 'Formulario' : 'Home';
+    const navigation = useNavigation();
+
+    navigation.navigate(screenName);
   }
 
   render() {
@@ -90,7 +98,7 @@ class Detalhes extends Component {
           </View>
 
           <View>
-            <TouchableOpacity style={Styles.button}>
+            <TouchableOpacity style={Styles.button} onPress={() => this.handleClickMainButton(this.isVisit())}>
               <Text style={Styles.textButton}>{this.isVisit() ? 'Preencher formulário' : 'Concluída'}</Text>
             </TouchableOpacity>
           </View>
