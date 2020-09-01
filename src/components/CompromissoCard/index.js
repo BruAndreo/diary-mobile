@@ -11,7 +11,7 @@ export default CompromissoCard = props => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.push('Detalhes', { idCompromisso: props.id })}>
+    <TouchableOpacity onPress={() => navigation.push('Detalhes', { idCompromisso: props.id, navigation: navigation })}>
       <View style={isVisit ? Style.cardVisit : Style.cardMeeting}>
         <View style={isVisit ? Style.headerVisit : Style.headerMeeting}>
           <Text style={Style.textHeader}>{isVisit ? 'Visita' : 'Reunião'}</Text>

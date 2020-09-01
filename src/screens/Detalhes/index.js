@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
-import { useNavigation } from '@react-navigation/native';
 import { Styles } from './style';
 import Compromissos from '../../app/Compromissos';
 import TypesCompromissos from '../../lib/TiposDeCompromissos';
@@ -11,7 +10,6 @@ class Detalhes extends Component {
   state = {
     compromisso: {}
   };
-
 
   constructor(props) {
     super(props);
@@ -46,9 +44,8 @@ class Detalhes extends Component {
 
   handleClickMainButton(isVisit) {
     const screenName = isVisit ? 'Formulario' : 'Home';
-    const navigation = useNavigation();
 
-    navigation.navigate(screenName);
+    this.props.navigation.navigate(screenName);
   }
 
   render() {
