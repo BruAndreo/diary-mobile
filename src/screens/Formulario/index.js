@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import Styles from './style';
 
 class Formulario extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class Formulario extends Component {
 
   render() {
     return (
-      <View>
+      <View style={Styles.container}>
         <Text>Formulario</Text>
       </View>
     );
