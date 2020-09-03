@@ -45,7 +45,7 @@ class Detalhes extends Component {
   handleClickMainButton(isVisit) {
     const screenName = isVisit ? 'Formulario' : 'Home';
 
-    this.props.navigation.navigate(screenName);
+    this.props.navigation.navigate(screenName, { idCompromisso: this.idCompromisso });
   }
 
   render() {
