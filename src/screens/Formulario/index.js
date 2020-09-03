@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Styles from './style';
 import Compromissos from '../../app/Compromissos';
+import tiposNegocios from '../../services/TiposNegocioMock';
+import tiposGarantias from '../../services/TiposGarantiaMock';
 
 class Formulario extends Component {
   state = {
