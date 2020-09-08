@@ -7,8 +7,12 @@ export default StyleSheet.create({
     padding: 20
   },
   visitaBox: {
-    height: 50,
+    height: 90,
     width: '100%',
-    backgroundColor: Colors.white
-  }
+  },
+  visitaText: {
+    color: Colors.primaryColor,
+    fontSize: 16,
+    marginBottom: 15,
+  },
 });

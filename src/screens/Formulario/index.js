@@ -48,15 +48,15 @@ class Formulario extends Component {
   }
 
   getEnderecoFormatado(address) {
-    return `${address.street}, ${address.number} ${address.city}-${address.uf} - ${address.cep}`;
+    return `${address.street}, ${address.number}, ${address.city}-${address.uf} - ${address.cep}`;
   }
 
   render() {
     return (
       <View style={Styles.container}>
         <View style={Styles.visitaBox}>
-          <Text>Data da Visita: {moment(this.state.data).format('DD/MM/YYYY')} às {this.state.hora}</Text>
-          <Text>Endereço da Visita: {this.state.enderecoVisita}</Text>
+          <Text style={Styles.visitaText}>Data da Visita: {moment(this.state.data).format('DD/MM/YYYY')} às {this.state.hora}</Text>
+          <Text style={Styles.visitaText}>Endereço da Visita: {this.state.enderecoVisita}</Text>
         </View>
       </View>
     );
