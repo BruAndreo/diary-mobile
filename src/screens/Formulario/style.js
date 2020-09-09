@@ -3,7 +3,7 @@ import Colors from '../../styles/Colors';
 
 export default StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     padding: 20
   },
   visitaBox: {
@@ -14,5 +14,30 @@ export default StyleSheet.create({
     color: Colors.primaryColor,
     fontSize: 16,
     marginBottom: 15,
+  },
+
+  label: {
+    color: Colors.primaryColor,
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginLeft: 5
+  },
+  textInputs: {
+    fontSize: 18,
+    color: Colors.primaryDark
+  },
+
+  pessoaisBox: {
+    width: '100%',
+    borderTopWidth: 1,
+    borderTopColor: Colors.primaryDark,
+  },
+  titleBox: {
+    marginTop: 10,
+    color: Colors.primaryColor,
+    fontWeight: 'bold',
+    textAlign: "center",
+    fontSize: 16,
+    marginBottom: 20
   },
 });
