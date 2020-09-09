@@ -31,6 +31,7 @@ export default StyleSheet.create({
     width: '100%',
     borderTopWidth: 1,
     borderTopColor: Colors.primaryDark,
+    marginBottom: 15
   },
   titleBox: {
     marginTop: 10,
