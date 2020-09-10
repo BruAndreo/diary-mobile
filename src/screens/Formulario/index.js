@@ -43,7 +43,8 @@ class Formulario extends Component {
       enderecoVisita: this.getEnderecoFormatado(dados.address),
       enderecoCliente: this.getEnderecoFormatado(dados.address),
       nomeEmpresa: dados.nomeEmpresa,
-      nomeContato: dados.nomeResponsavel
+      nomeContato: dados.nomeResponsavel,
+      qtdParcelas: 12
     });
   }
 
@@ -74,6 +75,23 @@ class Formulario extends Component {
   handleEnderecoCliente = text => {
     this.setState({ enderecoCliente: text });
   }
+
+  handlePropositoNegocio = text => {
+    this.setState({ propositoNegocio: text });
+  }
+
+  handleValorSolicitado = text => {
+    this.setState({ valorSolicitado: text });
+  }
+
+  handleQtdParcelas = text => {
+    this.setState({ qtdParcelas: text });
+  }
+
+  handleTiposGarantia = text => {
+    this.setState({ tiposGarantia: text });
+  }
+
 
   render() {
     return (
@@ -185,6 +203,74 @@ class Formulario extends Component {
             </View>
 
           </View>
+
+          <View style={Styles.pessoaisBox}>
+            <Text style={Styles.titleBox}>Proposta</Text>
+
+            <View>
+              <Text style={Styles.label}>Proposito do negócio</Text>
+              <TextInput
+                value={this.state.propositoNegocio}
+                onChangeText={this.handlePropositoNegocio}
+                underlineColorAndroid={'#123456'}
+                placeholder='Proposito do negócio'
+                spellCheck={false}
+                maxLength={100}
+                autoCompleteType={'off'}
+                autoCapitalize={'words'}
+                multiline={false}
+                style={Styles.textInputs} />
+            </View>
+
+            <View>
+              <Text style={Styles.label}>Valor Solicitado - R$</Text>
+              <TextInput
+                value={this.state.valorSolicitado}
+                onChangeText={this.handleValorSolicitado}
+                underlineColorAndroid={'#123456'}
+                placeholder='R$ 0,00'
+                spellCheck={false}
+                maxLength={14}
+                autoCompleteType={'off'}
+                autoCapitalize={'none'}
+                keyboardType={'number-pad'}
+                multiline={false}
+                style={Styles.textInputs} />
+            </View>
+
+            <View>
+              <Text style={Styles.label}>Quantidade de parcelas</Text>
+              <TextInput
+                value={this.state.qtdParcelas}
+                onChangeText={this.handleQtdParcelas}
+                underlineColorAndroid={'#123456'}
+                placeholder='1'
+                spellCheck={false}
+                maxLength={3}
+                autoCompleteType={'off'}
+                autoCapitalize={'none'}
+                keyboardType={'number-pad'}
+                multiline={false}
+                style={Styles.textInputs} />
+            </View>
+
+            <View>
+              <Text style={Styles.label}>Tipos de Garantia</Text>
+              <TextInput
+                value={this.state.tiposGarantia}
+                onChangeText={this.handleTiposGarantia}
+                underlineColorAndroid={'#123456'}
+                placeholder='Garantias'
+                spellCheck={false}
+                maxLength={150}
+                autoCompleteType={'off'}
+                autoCapitalize={'words'}
+                multiline={true}
+                style={Styles.textInputs} />
+            </View>
+
+          </View>
+
         </View>
       </ScrollView>
     );
