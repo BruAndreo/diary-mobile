@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, ScrollView } from 'react-native';
+import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import moment from 'moment';
 import Styles from './style';
 import Compromissos from '../../app/Compromissos';
@@ -92,6 +92,17 @@ class Formulario extends Component {
     this.setState({ tiposGarantia: text });
   }
 
+  handleRecomendado = text => {
+    this.setState({ recomendado: text });
+  }
+
+  handleParecerComercial = text => {
+    this.setState({ parecerComercial: text });
+  }
+
+  handleProximosPassos = text => {
+    this.setState({ proximosPassos: text });
+  }
 
   render() {
     return (
@@ -267,6 +278,62 @@ class Formulario extends Component {
                 autoCapitalize={'words'}
                 multiline={true}
                 style={Styles.textInputs} />
+            </View>
+
+          </View>
+
+          <View style={Styles.pessoaisBox}>
+            <Text style={Styles.titleBox}>Conclusão</Text>
+
+            <View>
+              <Text style={Styles.label}>Recomendado</Text>
+              <TextInput
+                value={this.state.recomendado}
+                onChangeText={this.handleRecomendado}
+                underlineColorAndroid={'#123456'}
+                placeholder='Sim ou Não'
+                spellCheck={false}
+                maxLength={3}
+                autoCompleteType={'off'}
+                autoCapitalize={'words'}
+                multiline={false}
+                style={Styles.textInputs} />
+            </View>
+
+            <View>
+              <Text style={Styles.label}>Parecer Comercial</Text>
+              <TextInput
+                value={this.state.parecerComercial}
+                onChangeText={this.handleValorSolicitado}
+                underlineColorAndroid={'#123456'}
+                placeholder='Parecer comercial'
+                spellCheck={false}
+                maxLength={300}
+                autoCompleteType={'off'}
+                autoCapitalize={'words'}
+                multiline={true}
+                style={Styles.textInputs} />
+            </View>
+
+            <View>
+              <Text style={Styles.label}>Próximos passos</Text>
+              <TextInput
+                value={this.state.proximosPassos}
+                onChangeText={this.handleQtdParcelas}
+                underlineColorAndroid={'#123456'}
+                placeholder='Próximos passos'
+                spellCheck={false}
+                maxLength={300}
+                autoCompleteType={'off'}
+                autoCapitalize={'words'}
+                multiline={true}
+                style={Styles.textInputs} />
+            </View>
+
+            <View>
+              <TouchableOpacity style={Styles.button} onPress={() => ({})}>
+                <Text style={Styles.textButton}>Enviar Formulário</Text>
+              </TouchableOpacity>
             </View>
 
           </View>

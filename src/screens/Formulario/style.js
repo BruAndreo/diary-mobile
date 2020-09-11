@@ -20,7 +20,8 @@ export default StyleSheet.create({
     color: Colors.primaryColor,
     fontWeight: 'bold',
     fontSize: 12,
-    marginLeft: 5
+    marginLeft: 5,
+    marginTop: 30
   },
   textInputs: {
     fontSize: 18,
@@ -31,7 +32,7 @@ export default StyleSheet.create({
     width: '100%',
     borderTopWidth: 1,
     borderTopColor: Colors.primaryDark,
-    marginBottom: 15
+    marginBottom: 40
   },
   titleBox: {
     marginTop: 10,
@@ -40,5 +41,20 @@ export default StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     marginBottom: 20
+  },
+  button: {
+    width: '100%',
+    height: 50,
+    backgroundColor: Colors.verdeEscuro,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    marginTop: 40,
+    borderRadius: 4
+  },
+  textButton: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 20
   },
 });
