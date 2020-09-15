@@ -3,11 +3,10 @@ import { View, Text, TextInput, ScrollView, TouchableOpacity, Switch } from 'rea
 import MultiSelect from 'react-native-multiple-select';
 import moment from 'moment';
 import Styles from './style';
-import Compromissos from '../../app/Compromissos';
-import tiposNegocios from '../../services/TiposNegocioMock';
-import tiposGarantias from '../../services/TiposGarantiaMock';
 import Colors from '../../styles/Colors';
+import Compromissos from '../../app/Compromissos';
 import TiposNegocioMock from '../../services/TiposNegocioMock';
+import TiposGarantiaMock from '../../services/TiposGarantiaMock';
 
 class Formulario extends Component {
   state = {
@@ -23,7 +22,7 @@ class Formulario extends Component {
     propositoNegocio: [],
     valorSolicitado: null,
     qtdParcelas: null,
-    tiposGarantia: null,
+    tiposGarantia: [],
     recomendado: true,
     parecerComercial: null,
     proximosPassos: null
@@ -80,8 +79,8 @@ class Formulario extends Component {
     this.setState({ enderecoCliente: text });
   }
 
-  handlePropositoNegocio = text => {
-    this.setState({ propositoNegocio: text });
+  handlePropositoNegocio = propositos => {
+    this.setState({ propositoNegocio: propositos });
   }
 
   handleValorSolicitado = text => {
@@ -92,11 +91,11 @@ class Formulario extends Component {
     this.setState({ qtdParcelas: text });
   }
 
-  handleTiposGarantia = text => {
-    this.setState({ tiposGarantia: text });
+  handleTiposGarantia = garantias => {
+    this.setState({ tiposGarantia: garantias });
   }
 
-  handleRecomendado = text => {
+  handleRecomendado = () => {
     this.setState({ recomendado: !this.state.recomendado });
   }
 
@@ -110,7 +109,7 @@ class Formulario extends Component {
 
   render() {
     return (
-      <ScrollView horizontal={false}>
+      <ScrollView >
         <View style={Styles.container}>
           <View style={Styles.visitaBox}>
             <Text style={Styles.visitaText}>Data da Visita: {moment(this.state.data).format('DD/MM/YYYY')} às {this.state.hora}</Text>
@@ -223,19 +222,7 @@ class Formulario extends Component {
             <Text style={Styles.titleBox}>Proposta</Text>
 
             <View>
-              <Text style={Styles.label}>Proposito do negócio</Text>
-              <TextInput
-                value={this.state.propositoNegocio}
-                onChangeText={this.handlePropositoNegocio}
-                underlineColorAndroid={'#123456'}
-                placeholder='Proposito do negócio'
-                spellCheck={false}
-                maxLength={100}
-                autoCompleteType={'off'}
-                autoCapitalize={'words'}
-                multiline={false}
-                style={Styles.textInputs} />
-
+              <Text style={Styles.labelSelect}>Proposito do negócio</Text>
               <MultiSelect
                 hideTags
                 items={TiposNegocioMock}
@@ -252,8 +239,7 @@ class Formulario extends Component {
                 selectedItemTextColor={Colors.verdeEscuro}
                 selectedItemIconColor={Colors.verdeEscuro}
                 itemTextColor={Colors.primaryDark}
-                displayKey="name"
-                searchInputStyle={{ color: Colors.verdeEscuro }}
+                displayKey="nome"
                 submitButtonColor={Colors.verdeEscuro}
                 submitButtonText="Pronto!"
               />
@@ -292,18 +278,27 @@ class Formulario extends Component {
             </View>
 
             <View>
-              <Text style={Styles.label}>Tipos de Garantia</Text>
-              <TextInput
-                value={this.state.tiposGarantia}
-                onChangeText={this.handleTiposGarantia}
-                underlineColorAndroid={'#123456'}
-                placeholder='Garantias'
-                spellCheck={false}
-                maxLength={150}
-                autoCompleteType={'off'}
-                autoCapitalize={'words'}
-                multiline={true}
-                style={Styles.textInputs} />
+              <Text style={Styles.labelSelect}>Tipos de Garantia</Text>
+              <MultiSelect
+                hideTags
+                items={TiposGarantiaMock}
+                uniqueKey="idTipoGarantia"
+                ref={(component) => { this.multiSelect = component }}
+                onSelectedItemsChange={this.handleTiposGarantia}
+                selectedItems={this.state.tiposGarantia}
+                selectText="Tipos de Garantias"
+                searchInputPlaceholderText="Procure..."
+                onChangeInput={ (text)=> console.log(text) }
+                tagRemoveIconColor={Colors.primaryDark}
+                tagBorderColor={Colors.primaryDark}
+                tagTextColor={Colors.primaryDark}
+                selectedItemTextColor={Colors.verdeEscuro}
+                selectedItemIconColor={Colors.verdeEscuro}
+                itemTextColor={Colors.primaryDark}
+                displayKey="nome"
+                submitButtonColor={Colors.verdeEscuro}
+                submitButtonText="Pronto!"
+              />
             </View>
 
           </View>

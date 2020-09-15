@@ -23,6 +23,14 @@ export default StyleSheet.create({
     marginLeft: 5,
     marginTop: 30
   },
+  labelSelect: {
+    color: Colors.primaryColor,
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginLeft: 5,
+    marginTop: 30,
+    marginBottom: 15
+  },
   textInputs: {
     fontSize: 18,
     color: Colors.primaryDark
