@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, Switch } from 'react-native';
+import MultiSelect from 'react-native-multiple-select';
 import moment from 'moment';
 import Styles from './style';
 import Compromissos from '../../app/Compromissos';
 import tiposNegocios from '../../services/TiposNegocioMock';
 import tiposGarantias from '../../services/TiposGarantiaMock';
 import Colors from '../../styles/Colors';
+import TiposNegocioMock from '../../services/TiposNegocioMock';
 
 class Formulario extends Component {
   state = {
@@ -18,7 +20,7 @@ class Formulario extends Component {
     nomeEmpresa: null,
     cpfCnpj: null,
     enderecoCliente: null,
-    propositoNegocio: null,
+    propositoNegocio: [],
     valorSolicitado: null,
     qtdParcelas: null,
     tiposGarantia: null,
@@ -233,6 +235,28 @@ class Formulario extends Component {
                 autoCapitalize={'words'}
                 multiline={false}
                 style={Styles.textInputs} />
+
+              <MultiSelect
+                hideTags
+                items={TiposNegocioMock}
+                uniqueKey="idTipoNegocio"
+                ref={(component) => { this.multiSelect = component }}
+                onSelectedItemsChange={this.handlePropositoNegocio}
+                selectedItems={this.state.propositoNegocio}
+                selectText="Tipos de Negócios"
+                searchInputPlaceholderText="Procure..."
+                onChangeInput={ (text)=> console.log(text) }
+                tagRemoveIconColor={Colors.primaryDark}
+                tagBorderColor={Colors.primaryDark}
+                tagTextColor={Colors.primaryDark}
+                selectedItemTextColor={Colors.verdeEscuro}
+                selectedItemIconColor={Colors.verdeEscuro}
+                itemTextColor={Colors.primaryDark}
+                displayKey="name"
+                searchInputStyle={{ color: Colors.verdeEscuro }}
+                submitButtonColor={Colors.verdeEscuro}
+                submitButtonText="Pronto!"
+              />
             </View>
 
             <View>
