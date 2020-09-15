@@ -106,7 +106,7 @@ class Formulario extends Component {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView horizontal={false}>
         <View style={Styles.container}>
           <View style={Styles.visitaBox}>
             <Text style={Styles.visitaText}>Data da Visita: {moment(this.state.data).format('DD/MM/YYYY')} às {this.state.hora}</Text>
@@ -330,13 +330,13 @@ class Formulario extends Component {
                 style={Styles.textInputs} />
             </View>
 
-            <View>
+          </View>
+
+          <View>
               <TouchableOpacity style={Styles.button} onPress={() => ({})}>
                 <Text style={Styles.textButton}>Enviar Formulário</Text>
               </TouchableOpacity>
             </View>
-
-          </View>
 
         </View>
       </ScrollView>

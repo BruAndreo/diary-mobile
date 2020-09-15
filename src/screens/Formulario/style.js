@@ -30,9 +30,10 @@ export default StyleSheet.create({
 
   pessoaisBox: {
     width: '100%',
-    borderTopWidth: 1,
-    borderTopColor: Colors.primaryDark,
-    marginBottom: 40
+    marginBottom: 40,
+    backgroundColor: Colors.white,
+    padding: 20,
+    borderRadius: 10,
   },
   titleBox: {
     marginTop: 10,
