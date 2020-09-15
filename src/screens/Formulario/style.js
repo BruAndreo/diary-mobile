@@ -58,4 +58,14 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20
   },
+  radio: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 15
+  },
+  radioText: {
+    marginLeft: 5,
+    fontSize: 18,
+    color: Colors.primaryDark
+  },
 });

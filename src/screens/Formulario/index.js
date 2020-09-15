@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, ScrollView, TouchableOpacity, Switch } from 'react-native';
 import moment from 'moment';
 import Styles from './style';
 import Compromissos from '../../app/Compromissos';
 import tiposNegocios from '../../services/TiposNegocioMock';
 import tiposGarantias from '../../services/TiposGarantiaMock';
+import Colors from '../../styles/Colors';
 
 class Formulario extends Component {
   state = {
@@ -44,7 +45,8 @@ class Formulario extends Component {
       enderecoCliente: this.getEnderecoFormatado(dados.address),
       nomeEmpresa: dados.nomeEmpresa,
       nomeContato: dados.nomeResponsavel,
-      qtdParcelas: 12
+      qtdParcelas: 12,
+      recomendado: true
     });
   }
 
@@ -93,7 +95,7 @@ class Formulario extends Component {
   }
 
   handleRecomendado = text => {
-    this.setState({ recomendado: text });
+    this.setState({ recomendado: !this.state.recomendado });
   }
 
   handleParecerComercial = text => {
@@ -287,17 +289,17 @@ class Formulario extends Component {
 
             <View>
               <Text style={Styles.label}>Recomendado</Text>
-              <TextInput
-                value={this.state.recomendado}
-                onChangeText={this.handleRecomendado}
-                underlineColorAndroid={'#123456'}
-                placeholder='Sim ou Não'
-                spellCheck={false}
-                maxLength={3}
-                autoCompleteType={'off'}
-                autoCapitalize={'words'}
-                multiline={false}
-                style={Styles.textInputs} />
+
+              <View style={Styles.radio}>
+                <Text style={Styles.radioText}>Não</Text>
+                <Switch
+                  trackColor={{ false: Colors.error, true: Colors.verdeEscuro }}
+                  thumbColor={this.state.recomendado ? Colors.verdeEscuro : Colors.error}
+                  onValueChange={this.handleRecomendado}
+                  value={this.state.recomendado}
+                />
+                <Text style={Styles.radioText}>Sim</Text>
+              </View>
             </View>
 
             <View>
@@ -333,10 +335,10 @@ class Formulario extends Component {
           </View>
 
           <View>
-              <TouchableOpacity style={Styles.button} onPress={() => ({})}>
-                <Text style={Styles.textButton}>Enviar Formulário</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={Styles.button} onPress={() => ({})}>
+              <Text style={Styles.textButton}>Enviar Formulário</Text>
+            </TouchableOpacity>
+          </View>
 
         </View>
       </ScrollView>
