@@ -17,6 +17,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '1',
@@ -32,6 +33,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '2',
@@ -47,6 +49,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '20',
@@ -62,6 +65,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   //terça
   {
@@ -78,6 +82,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '5',
@@ -93,6 +98,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '6',
@@ -108,6 +114,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   //quarta
   {
@@ -124,6 +131,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '8',
@@ -139,6 +147,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '9',
@@ -154,6 +163,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   // quinta
   {
@@ -170,6 +180,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '11',
@@ -185,6 +196,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '12',
@@ -200,6 +212,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   // sexta
   {
@@ -216,6 +229,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '14',
@@ -231,6 +245,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
   {
     id: '15',
@@ -246,5 +261,6 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
+    finished: false,
   },
 ];

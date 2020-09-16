@@ -7,6 +7,7 @@ import Colors from '../../styles/Colors';
 import Compromissos from '../../app/Compromissos';
 import TiposNegocioMock from '../../services/TiposNegocioMock';
 import TiposGarantiaMock from '../../services/TiposGarantiaMock';
+import Visita from '../../app/Visita';
 
 class Formulario extends Component {
   state = {
@@ -105,6 +106,37 @@ class Formulario extends Component {
 
   handleProximosPassos = text => {
     this.setState({ proximosPassos: text });
+  }
+
+  getDataAndValidate = () => ({
+    idCompromisso: this.idCompromisso,
+    dadosPessoais: {
+      nome: this.state.nomeContato,
+      email: this.state.email,
+      telefone: this.state.telefone
+    },
+    dadosEmpresariais: {
+      nomeEmpresa: this.state.nomeEmpresa,
+      cpfCnpj: this.state.cpfCnpj,
+      enderecoCliente: this.enderecoCliente
+    },
+    proposta: {
+      valorSolicitado: this.state.valorSolicitado,
+      qtdParcelas: this.state.qtdParcelas,
+      propositoNegocio: this.state.propositoNegocio,
+      garantias: this.state.tiposGarantia
+    },
+    conclusoes: {
+      recomendado: this.state.recomendado,
+      parecerComercial: this.state.parecerComercial,
+      proximosPassos: this.state.proximosPassos
+    }
+  });
+
+  handleSubmit = () => {
+    const dados = getDataAndValidate();
+
+    const visita = new Visita(dados);
   }
 
   render() {
