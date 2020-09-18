@@ -76,4 +76,19 @@ export default StyleSheet.create({
     fontSize: 18,
     color: Colors.primaryDark
   },
+  buttonAnexo: {
+    width: '80%',
+    height: 40,
+    backgroundColor: Colors.amareloReuniao,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 4
+  },
+  textButtonAnexo: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 18
+  },
 });

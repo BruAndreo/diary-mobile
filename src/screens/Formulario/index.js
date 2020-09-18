@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, Switch } from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
+import DocumentPicker from 'react-native-document-picker';
 import moment from 'moment';
 import Styles from './style';
 import Colors from '../../styles/Colors';
@@ -25,7 +26,8 @@ class Formulario extends Component {
     tiposGarantia: [],
     recomendado: true,
     parecerComercial: null,
-    proximosPassos: null
+    proximosPassos: null,
+    anexos: []
   };
 
   constructor(props) {
@@ -105,6 +107,24 @@ class Formulario extends Component {
 
   handleProximosPassos = text => {
     this.setState({ proximosPassos: text });
+  }
+
+  handleAnexo = async () => {
+    try {
+      const docs = await DocumentPicker.pickMultiple({});
+
+      this.setState({
+        anexos: docs.map(doc => ({
+          nome: doc.name,
+          tipo: doc.type,
+          size: doc.size,
+          path: doc.uri
+        }))
+      });
+
+    } catch (e) {
+      console.error('anexo erro', e);
+    }
   }
 
   getDataAndValidate = () => ({
@@ -384,6 +404,22 @@ class Formulario extends Component {
                 multiline={true}
                 style={Styles.textInputs} />
             </View>
+
+          </View>
+
+
+          <View style={Styles.pessoaisBox}>
+            <Text style={Styles.titleBox}>Anexos</Text>
+
+            <View style={{ alignItems: 'center' }}>
+              <TouchableOpacity style={Styles.buttonAnexo} onPress={this.handleAnexo}>
+                <Text style={Styles.textButtonAnexo}>Adicionar Anexo</Text>
+              </TouchableOpacity>
+            </View>
+
+            {this.state.anexos.map(anexo => (
+              <Text>{anexo.nome}</Text>
+            ))}
 
           </View>
 
