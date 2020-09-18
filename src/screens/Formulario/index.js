@@ -7,7 +7,6 @@ import Colors from '../../styles/Colors';
 import Compromissos from '../../app/Compromissos';
 import TiposNegocioMock from '../../services/TiposNegocioMock';
 import TiposGarantiaMock from '../../services/TiposGarantiaMock';
-import Visita from '../../app/Visita';
 
 class Formulario extends Component {
   state = {
@@ -134,9 +133,12 @@ class Formulario extends Component {
   });
 
   handleSubmit = () => {
-    const dados = getDataAndValidate();
+    const dados = this.getDataAndValidate();
+    const compromissos = new Compromissos();
 
-    const visita = new Visita(dados);
+    compromissos.finishVisit(this.idCompromisso, dados);
+
+    this.props.navigation.navigate('Home');
   }
 
   render() {
@@ -386,7 +388,7 @@ class Formulario extends Component {
           </View>
 
           <View>
-            <TouchableOpacity style={Styles.button} onPress={() => ({})}>
+            <TouchableOpacity style={Styles.button} onPress={this.handleSubmit}>
               <Text style={Styles.textButton}>Enviar Formulário</Text>
             </TouchableOpacity>
           </View>

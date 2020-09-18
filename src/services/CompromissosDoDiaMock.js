@@ -1,5 +1,6 @@
 import moment from "moment";
 import TypesCompromissos from '../lib/TiposDeCompromissos';
+import StatusCompromissos from '../lib/StatusCompromissos';
 
 export default [
   //segunda
@@ -17,7 +18,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '1',
@@ -33,7 +34,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '2',
@@ -49,7 +50,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '20',
@@ -65,7 +66,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   //terça
   {
@@ -82,7 +83,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '5',
@@ -98,7 +99,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '6',
@@ -114,7 +115,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   //quarta
   {
@@ -131,7 +132,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '8',
@@ -147,7 +148,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '9',
@@ -163,7 +164,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   // quinta
   {
@@ -180,7 +181,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '11',
@@ -196,7 +197,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '12',
@@ -212,7 +213,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   // sexta
   {
@@ -229,7 +230,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '14',
@@ -245,7 +246,7 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
   {
     id: '15',
@@ -261,6 +262,6 @@ export default [
       city: "São Paulo",
       uf: "SP",
     },
-    finished: false,
+    status: StatusCompromissos.PENDING,
   },
 ];
