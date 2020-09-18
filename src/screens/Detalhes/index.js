@@ -45,6 +45,11 @@ class Detalhes extends Component {
   handleClickMainButton(isVisit) {
     const screenName = isVisit ? 'Formulario' : 'Home';
 
+    if (!isVisit) {
+      const compromisso = new Compromissos();
+      compromisso.finishMeeting(this.idCompromisso);
+    }
+
     this.props.navigation.navigate(screenName, { idCompromisso: this.idCompromisso });
   }
 

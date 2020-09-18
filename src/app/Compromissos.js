@@ -45,6 +45,14 @@ class Compromissos {
     return;
   }
 
+  finishMeeting(idCompromisso) {
+    const compromisso = this.getCompromissoById(idCompromisso);
+
+    compromisso.status = StatusCompromissos.SENDED;
+
+    return;
+  }
+
 }
 
 export default Compromissos;
