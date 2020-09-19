@@ -7,7 +7,7 @@ import HomeRoute from './HomeRoute';
 import VisitasRoute from './VisitasRoute';
 import ReunioesRoute from './ReunioesRoute';
 import SincronizacaoRoute from './SincronizacaoRoute';
-import AjudaRoute from './AjudaRoute';
+import SobreRoute from './SobreRoute';
 import Colors from '../styles/Colors';
 
 Icon.loadFont();
@@ -67,10 +67,10 @@ export default function DrawerRouter () {
       />
 
       <Drawer.Screen
-        name='Ajuda'
-        component={AjudaRoute}
+        name='Sobre'
+        component={SobreRoute}
         options={{
-          title: 'Ajuda',
+          title: 'Sobre',
           drawerIcon: () => <Icon name="help" size={22} color='#fff' />
         }}
       />
