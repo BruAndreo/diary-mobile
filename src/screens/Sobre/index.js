@@ -30,13 +30,13 @@ class Sobre extends Component {
 
           <View>
             <View style={{ alignItems: 'center' }}>
-              <TouchableOpacity style={Styles.buttonAnexo} onPress={this.handleAnexo}>
+              <TouchableOpacity style={Styles.buttonAnexo} onPress={() => ({})}>
                 <Text style={Styles.textButtonAnexo}>FAQ</Text>
               </TouchableOpacity>
             </View>
 
             <View style={{ alignItems: 'center' }}>
-              <TouchableOpacity style={Styles.buttonAnexo} onPress={this.handleAnexo}>
+              <TouchableOpacity style={Styles.buttonAnexo} onPress={() => ({})}>
                 <Text style={Styles.textButtonAnexo}>Suporte</Text>
               </TouchableOpacity>
             </View>
