@@ -32,4 +32,26 @@ export const Styles = StyleSheet.create({
   textBold: {
     fontWeight: 'bold'
   },
+  title: {
+    fontSize: 18,
+    color: Colors.primaryDark,
+    fontWeight: "bold",
+    marginBottom: 10
+  },
+  buttonAnexo: {
+    width: 100,
+    height: 40,
+    backgroundColor: Colors.primaryDark,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 4,
+    marginRight: 20
+  },
+  textButtonAnexo: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16
+  },
 });
