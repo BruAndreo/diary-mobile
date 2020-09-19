@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
+import { Styles } from './Style';
+import LogoPath from '../../assets/diary-logo-escuro.png';
 
 class Sobre extends Component {
 
@@ -11,8 +13,17 @@ class Sobre extends Component {
 
   render() {
     return (
-      <View>
-        <Text>Você precisa de ajuda?</Text>
+      <View style={Styles.container}>
+        <View style={Styles.card}>
+          <Image
+            source={LogoPath}
+            style={Styles.logo}
+          />
+
+          <Text style={Styles.textin}>Desenvolvido por <Text style={Styles.textBold}>Engenhando</Text></Text>
+
+          <Text style={Styles.textinSobre}>Versão <Text style={Styles.textBold}>1.0.0</Text></Text>
+        </View>
       </View>
     );
   }
