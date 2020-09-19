@@ -110,21 +110,23 @@ class Formulario extends Component {
   }
 
   handleAnexo = async () => {
+    let docs = [];
+
     try {
-      const docs = await DocumentPicker.pickMultiple({});
-
-      this.setState({
-        anexos: docs.map(doc => ({
-          nome: doc.name,
-          tipo: doc.type,
-          size: doc.size,
-          path: doc.uri
-        }))
-      });
-
+      docs = await DocumentPicker.pickMultiple({});
     } catch (e) {
-      console.error('anexo erro', e);
+      console.info('anexo erro', e);
+      return;
     }
+
+    this.setState({
+      anexos: docs.map(doc => ({
+        nome: doc.name,
+        tipo: doc.type,
+        size: doc.size,
+        path: doc.uri
+      }))
+    });
   }
 
   getDataAndValidate = () => ({
@@ -417,9 +419,11 @@ class Formulario extends Component {
               </TouchableOpacity>
             </View>
 
-            {this.state.anexos.map(anexo => (
-              <Text>{anexo.nome}</Text>
-            ))}
+            <View style={Styles.anexoBox}>
+              {this.state.anexos.map(anexo => (
+                <Text style={Styles.anexos} >{anexo.nome}</Text>
+              ))}
+            </View>
 
           </View>
 

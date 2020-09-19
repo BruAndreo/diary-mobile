@@ -91,4 +91,13 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18
   },
+  anexoBox: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20
+  },
+  anexos: {
+    fontSize: 16,
+    color: Colors.primaryColor
+  },
 });
