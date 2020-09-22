@@ -53,6 +53,16 @@ class Detalhes extends Component {
     this.props.navigation.navigate(screenName, { idCompromisso: this.idCompromisso });
   }
 
+  handleRemarcar() {}
+
+  handleCancelar() {
+    const compromisso = new Compromissos();
+
+    compromisso.cancelCompromisso(this.idCompromisso);
+
+    this.props.navigation.navigate('Home');
+  }
+
   render() {
     const compromisso = this.state.compromisso;
     const address = compromisso.address;
@@ -103,6 +113,20 @@ class Detalhes extends Component {
             <TouchableOpacity style={Styles.button} onPress={() => this.handleClickMainButton(this.isVisit())}>
               <Text style={Styles.textButton}>{this.isVisit() ? 'Preencher formulário' : 'Concluída'}</Text>
             </TouchableOpacity>
+          </View>
+
+          <View style={Styles.twoButtons}>
+            <View>
+              <TouchableOpacity style={Styles.buttonRemarcar} onPress={this.handleRemarcar}>
+                <Text style={Styles.textButton}>{'Remarcar'}</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <TouchableOpacity style={Styles.buttonCancel} onPress={() => this.handleCancelar()}>
+                <Text style={Styles.textButton}>{'Cancelar'}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
         </View>

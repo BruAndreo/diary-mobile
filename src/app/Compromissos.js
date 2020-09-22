@@ -53,6 +53,19 @@ class Compromissos {
     return;
   }
 
+  cancelCompromisso(idCompromisso) {
+    const compromisso = this.getCompromissoById(idCompromisso);
+
+    compromisso.status = StatusCompromissos.CANCELLED;
+  }
+
+  remarcarCompromisso(idCompromisso, at, hour) {
+    const compromisso = this.getCompromissoById(idCompromisso);
+
+    compromisso.at = at;
+    compromisso.hour = hour;
+  }
+
 }
 
 export default Compromissos;

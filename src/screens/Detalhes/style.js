@@ -69,4 +69,30 @@ export const Styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20
   },
+  twoButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: 300
+  },
+  buttonRemarcar: {
+    width: 130,
+    height: 60,
+    backgroundColor: Colors.amareloReuniao,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    marginTop: 40,
+    borderRadius: 4
+  },
+  buttonCancel: {
+    width: 130,
+    height: 60,
+    backgroundColor: Colors.error,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    marginTop: 40,
+    borderRadius: 4
+  },
 });
