@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
+import DatePicker from 'react-native-datepicker'
 import { Styles } from './style';
 import Compromissos from '../../app/Compromissos';
 import TypesCompromissos from '../../lib/TiposDeCompromissos';
 
 class Detalhes extends Component {
   state = {
-    compromisso: {}
+    compromisso: {},
+    openModal: false
   };
 
   constructor(props) {
@@ -53,7 +55,20 @@ class Detalhes extends Component {
     this.props.navigation.navigate(screenName, { idCompromisso: this.idCompromisso });
   }
 
-  handleRemarcar() {}
+  handleRemarcar() {
+    this.setState({ openModal: true });
+  }
+
+  remarcar(date) {
+    const data = date.split(' - ').map(i => i.trim());
+
+    const compromisso = this.state.compromisso;
+
+    compromisso.at = moment(date, "DD-MM-YYYY HH:mm");
+    compromisso.hour = data[1];
+
+    this.setState({ compromisso, openModal: false });
+  }
 
   handleCancelar() {
     const compromisso = new Compromissos();
@@ -117,7 +132,7 @@ class Detalhes extends Component {
 
           <View style={Styles.twoButtons}>
             <View>
-              <TouchableOpacity style={Styles.buttonRemarcar} onPress={this.handleRemarcar}>
+              <TouchableOpacity style={Styles.buttonRemarcar} onPress={() => this.handleRemarcar()}>
                 <Text style={Styles.textButton}>{'Remarcar'}</Text>
               </TouchableOpacity>
             </View>
@@ -128,6 +143,28 @@ class Detalhes extends Component {
               </TouchableOpacity>
             </View>
           </View>
+
+          {this.state.openModal && (
+            <DatePicker
+              style={{width: 200}}
+              //date={this.state.compromisso.at}
+              mode="datetime"
+              placeholder="Selecione a data"
+              format="DD-MM-YYYY HH:mm"
+              minDate={moment()}
+              showIcon={false}
+              confirmBtnText="Confirmar"
+              cancelBtnText="Cancelar"
+              customStyles={{
+                dateInput: {
+                  marginLeft: 36,
+                  color: '#000'
+                }
+              }}
+              onDateChange={(date) => this.remarcar(date)}
+              //ref={datePicker => datePicker.onPressDate()}
+            />
+          )}
 
         </View>
       </View>
