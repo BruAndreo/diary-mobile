@@ -6,6 +6,7 @@ import DatePicker from 'react-native-datepicker'
 import { Styles } from './style';
 import Compromissos from '../../app/Compromissos';
 import TypesCompromissos from '../../lib/TiposDeCompromissos';
+import DateSelector from '../../components/DatePicker';
 
 class Detalhes extends Component {
   state = {
@@ -18,6 +19,8 @@ class Detalhes extends Component {
 
     this.props = props;
     this.idCompromisso = props.route.params.idCompromisso;
+
+    this.remarcar = this.remarcar.bind(this);
   }
 
   componentDidMount() {
@@ -60,7 +63,7 @@ class Detalhes extends Component {
   }
 
   remarcar(date) {
-    const data = date.split(' - ').map(i => i.trim());
+    const data = date.split(' ').map(i => i.trim());
 
     const compromisso = this.state.compromisso;
 
@@ -145,25 +148,7 @@ class Detalhes extends Component {
           </View>
 
           {this.state.openModal && (
-            <DatePicker
-              style={{width: 200}}
-              //date={this.state.compromisso.at}
-              mode="datetime"
-              placeholder="Selecione a data"
-              format="DD-MM-YYYY HH:mm"
-              minDate={moment()}
-              showIcon={false}
-              confirmBtnText="Confirmar"
-              cancelBtnText="Cancelar"
-              customStyles={{
-                dateInput: {
-                  marginLeft: 36,
-                  color: '#000'
-                }
-              }}
-              onDateChange={(date) => this.remarcar(date)}
-              //ref={datePicker => datePicker.onPressDate()}
-            />
+            <DateSelector at={compromisso.at} remarcar={this.remarcar} />
           )}
 
         </View>

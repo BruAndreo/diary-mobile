@@ -15,7 +15,6 @@ class DateSelector extends Component {
   }
 
   componentDidMount() {
-    console.info(this.props.at);
     this.setState({ at: moment(this.props.at) });
 
     if (this.datePicker) {
