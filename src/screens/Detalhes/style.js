@@ -56,7 +56,7 @@ export const Styles = StyleSheet.create({
   },
   button: {
     width: 300,
-    height: 60,
+    height: 45,
     backgroundColor: Colors.verdeEscuro,
     alignItems: 'center',
     justifyContent: 'center',
@@ -77,22 +77,22 @@ export const Styles = StyleSheet.create({
   },
   buttonRemarcar: {
     width: 130,
-    height: 60,
+    height: 45,
     backgroundColor: Colors.amareloReuniao,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
-    marginTop: 40,
+    marginTop: 20,
     borderRadius: 4
   },
   buttonCancel: {
     width: 130,
-    height: 60,
+    height: 45,
     backgroundColor: Colors.error,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
-    marginTop: 40,
+    marginTop: 20,
     borderRadius: 4
   },
 });
