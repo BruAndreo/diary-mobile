@@ -23,6 +23,7 @@
     "react-native-document-picker": "^3.5.4",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-multiple-select": "^0.5.5",
+    "react-native-open-maps": "^0.3.5",
     "react-native-reanimated": "^1.8.0",
     "react-native-safe-area-context": "^1.0.0",
     "react-native-safe-area-view": "^1.1.1",

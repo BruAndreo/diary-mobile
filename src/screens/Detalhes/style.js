@@ -54,6 +54,16 @@ export const Styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 15
   },
+  buttonRota: {
+    width: 300,
+    height: 45,
+    backgroundColor: Colors.primaryColor,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    marginTop: 40,
+    borderRadius: 4
+  },
   button: {
     width: 300,
     height: 45,

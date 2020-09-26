@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
-import DatePicker from 'react-native-datepicker'
+import openMap from 'react-native-open-maps';
 import { Styles } from './style';
 import Compromissos from '../../app/Compromissos';
 import TypesCompromissos from '../../lib/TiposDeCompromissos';
@@ -45,6 +45,15 @@ class Detalhes extends Component {
 
   getEndereco(address) {
     return `${address.street}, ${address.number} - ${address.cep} \n ${address.city}/${address.uf}`;
+  }
+
+  handleIniciarRota() {
+    openMap({
+      latitude: -23.5661755,
+      longitude: -46.6517119,
+      travelType: 'drive',
+      provider: 'google'
+    });
   }
 
   handleClickMainButton(isVisit) {
@@ -125,6 +134,12 @@ class Detalhes extends Component {
               <Text style={Styles.valueAddress}>{this.getEndereco(new Object(address))}</Text>
             </View>
 
+          </View>
+
+          <View>
+            <TouchableOpacity style={Styles.buttonRota} onPress={() => this.handleIniciarRota()}>
+              <Text style={Styles.textButton}>{'Iniciar Rota'}</Text>
+            </TouchableOpacity>
           </View>
 
           <View>
