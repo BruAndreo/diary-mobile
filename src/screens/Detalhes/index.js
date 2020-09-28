@@ -52,7 +52,8 @@ class Detalhes extends Component {
       latitude: -23.5661755,
       longitude: -46.6517119,
       travelType: 'drive',
-      provider: 'google'
+      provider: 'google',
+      end: this.getEndereco(new Object(this.state.compromisso.address))
     });
   }
 
