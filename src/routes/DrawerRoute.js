@@ -6,7 +6,6 @@ import Login from '../screens/Login';
 import HomeRoute from './HomeRoute';
 import VisitasRoute from './VisitasRoute';
 import ReunioesRoute from './ReunioesRoute';
-import SincronizacaoRoute from './SincronizacaoRoute';
 import SobreRoute from './SobreRoute';
 import Colors from '../styles/Colors';
 
@@ -54,15 +53,6 @@ export default function DrawerRouter () {
         options={{
           title: 'Reuniões',
           drawerIcon: () => <Icon name="work" size={22} color='#fff' />
-        }}
-      />
-
-      <Drawer.Screen
-        name='Sincronizações'
-        component={SincronizacaoRoute}
-        options={{
-          title: 'Sincronizações',
-          drawerIcon: () => <Icon name="sync" size={22} color='#fff' />
         }}
       />
 
