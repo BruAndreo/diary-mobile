@@ -1,11 +1,19 @@
+import axios from 'axios';
+
 class Authentication {
 
-  static authenticate(username, password) {
-    if (username === password) {
-      throw new Error('Usuário e/ou senha inválidos');
-    }
+  static async authenticate(username, password) {
+    try {
+      const dados = await axios.post('https://apidiary.herokuapp.com/v1/authenticate', {}, { auth: { username, password } });
 
-    return true;
+      console.info(dados.data.token);
+
+      return true;
+    } catch (error) {
+      console.info('Login error: ', error);
+
+      throw new Error('NotAutenticaded');
+    }
   }
 
 }

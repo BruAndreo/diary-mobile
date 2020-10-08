@@ -33,11 +33,11 @@ class Login extends Component {
     }
   };
 
-  loginClicked = () => {
+  loginClicked = async () => {
     try {
       this.validateInputs();
 
-      let logged = Authentication.authenticate(this.state.login, this.state.password);
+      let logged = await Authentication.authenticate(this.state.login, this.state.password);
 
       if (logged) {
         this.props.navigation.replace(Screens.drawerMenu);
