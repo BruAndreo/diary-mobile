@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator } from 'react-native';
 import moment from 'moment';
 
 import Styles from './style';
@@ -10,7 +10,8 @@ import CompromissoCard from '../CompromissoCard';
 class CompromissosList extends Component {
 
   state = {
-    compromissos: []
+    compromissos: [],
+    loading: false
   };
 
   constructor(props) {
@@ -23,30 +24,34 @@ class CompromissosList extends Component {
     this.setCompromissos = this.setCompromissos.bind(this);
   }
 
-  componentDidMount() {
-    this.setCompromissos(this.props.type);
+  async componentDidMount() {
+    await this.setCompromissos(this.props.type);
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     if (prevProps.date !== this.props.date) {
-      this.setCompromissos();
+      await this.setCompromissos();
     }
   }
 
-  setCompromissos(type = null) {
+  async setCompromissos(type = null) {
+    this.setState({ loading: true });
+
     const compromissos = new Compromissos();
 
     if (!type) {
-      this.setState({ compromissos: compromissos.getCompromissosByDate(this.props.date) });
+      this.setState({ compromissos: await compromissos.getCompromissosByDate(this.props.date) });
     } else {
-      this.setState({ compromissos: compromissos.getCompromissos(type) });
+      this.setState({ compromissos: await compromissos.getCompromissos(type) });
     }
 
+    this.setState({ loading: false });
   }
 
   render() {
     return (
       <View>
+        {this.state.loading ? <ActivityIndicator size='large' color={'#123456'} /> :
         <FlatList
           contentContainerStyle={Styles.lista}
           data={this.state.compromissos}
@@ -64,7 +69,7 @@ class CompromissosList extends Component {
           )}
           ListEmptyComponent={<View><Text>Você não possui compromissos</Text></View>}
           ListFooterComponent={() => <View style={{ height: 200 }}></View>}
-        />
+        />}
       </View>
     );
   }

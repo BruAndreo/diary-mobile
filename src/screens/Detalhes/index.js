@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import openMap from 'react-native-open-maps';
@@ -11,7 +11,11 @@ import DateSelector from '../../components/DatePicker';
 class Detalhes extends Component {
   state = {
     compromisso: {},
-    openModal: false
+    openModal: false,
+    loadingFinish: false,
+    loadingRemarcar: false,
+    loadingCancelar: false,
+    loadingGeral: false
   };
 
   constructor(props) {
@@ -23,12 +27,13 @@ class Detalhes extends Component {
     this.remarcar = this.remarcar.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    this.setState({ loadingGeral: true });
     const compromissos = new Compromissos();
 
-    const dados = compromissos.getCompromissoById(this.idCompromisso);
+    const dados = await compromissos.getCompromissoById(this.idCompromisso);
 
-    this.setState({ compromisso: dados });
+    this.setState({ compromisso: dados, loadingGeral: false });
   }
 
   isVisit() {
@@ -40,11 +45,11 @@ class Detalhes extends Component {
   }
 
   getDay(compromisso) {
-    return moment().isSame(compromisso.at, 'day') ? 'Hoje' : compromisso.at.format('D/MM')
+    return moment().isSame(compromisso.at, 'day') ? 'Hoje' : compromisso.at.format('D/MM');
   }
 
   getEndereco(address) {
-    return `${address.street}, ${address.number} - ${address.cep} \n ${address.city}/${address.uf}`;
+    return `${address.street}, ${address.number} \n ${address.cep} ${address.city}/${address.uf}`;
   }
 
   handleIniciarRota() {
@@ -57,14 +62,16 @@ class Detalhes extends Component {
     });
   }
 
-  handleClickMainButton(isVisit) {
+  async handleClickMainButton(isVisit) {
+    this.setState({ loadingFinish: false });
     const screenName = isVisit ? 'Formulario' : 'Home';
 
     if (!isVisit) {
       const compromisso = new Compromissos();
-      compromisso.finishMeeting(this.idCompromisso);
+      await compromisso.finishMeeting(this.idCompromisso);
     }
 
+    this.setState({ loadingFinish: true });
     this.props.navigation.navigate(screenName, { idCompromisso: this.idCompromisso });
   }
 
@@ -72,23 +79,45 @@ class Detalhes extends Component {
     this.setState({ openModal: true });
   }
 
-  remarcar(date) {
+  async remarcar(date) {
+    this.setState({ openModal: false, loadingRemarcar: true });
     const data = date.split(' ').map(i => i.trim());
 
     const compromisso = this.state.compromisso;
-
     compromisso.at = moment(date, "DD-MM-YYYY HH:mm");
     compromisso.hour = data[1];
 
-    this.setState({ compromisso, openModal: false });
+    const comp = new Compromissos();
+    await comp.remarcarCompromisso(this.idCompromisso, compromisso.at, compromisso.hour);
+
+    this.setState({ compromisso, loadingRemarcar: false });
+
+    Alert.alert('Compromisso atualizado!', `${this.getTypeString()} foi remarcada com sucesso.`, [{
+      text: 'OK',
+      onPress: () => this.props.navigation.push('Home')
+    }], {cancelable: false});
   }
 
-  handleCancelar() {
+  async handleCancelar() {
+    this.setState({ loadingCancelar: true });
     const compromisso = new Compromissos();
 
-    compromisso.cancelCompromisso(this.idCompromisso);
+    Alert.alert('Confirmar Cancelamento', `Você deseja cancelar esta ${this.getTypeString()}?`, [
+      {
+        text: 'Não cancelar',
+        onPress: () => this.setState({ loadingCancelar: false })
+      },
+      {
+        text: 'Cancelar',
+        style: 'destructive',
+        onPress: async () => {
+          await compromisso.cancelCompromisso(this.idCompromisso);
 
-    this.props.navigation.navigate('Home');
+          this.setState({ loadingCancelar: false });
+          this.props.navigation.push('Home');
+        }
+      }
+    ], {cancelable: false});
   }
 
   render() {
@@ -97,7 +126,8 @@ class Detalhes extends Component {
 
     return (
       <View>
-        <View style={this.isVisit() ? Styles.visit : Styles.meeting}>
+        {this.state.loadingGeral? <ActivityIndicator size="large" color={'#123456'} /> :
+        (<View><View style={this.isVisit() ? Styles.visit : Styles.meeting}>
           <Text style={Styles.textMiniHeader}>{this.getTypeString()}</Text>
         </View>
 
@@ -145,20 +175,22 @@ class Detalhes extends Component {
 
           <View>
             <TouchableOpacity style={Styles.button} onPress={() => this.handleClickMainButton(this.isVisit())}>
-              <Text style={Styles.textButton}>{this.isVisit() ? 'Preencher formulário' : 'Concluída'}</Text>
+              <Text style={Styles.textButton}>{this.isVisit() ? 'Preencher formulário' : 'Finalizar Reunião'}</Text>
             </TouchableOpacity>
           </View>
 
           <View style={Styles.twoButtons}>
             <View>
               <TouchableOpacity style={Styles.buttonRemarcar} onPress={() => this.handleRemarcar()}>
-                <Text style={Styles.textButton}>{'Remarcar'}</Text>
+                {this.state.loadingRemarcar ? <ActivityIndicator size='small' color='#ffffff' /> :
+                <Text style={Styles.textButton}>{'Remarcar'}</Text>}
               </TouchableOpacity>
             </View>
 
             <View>
               <TouchableOpacity style={Styles.buttonCancel} onPress={() => this.handleCancelar()}>
-                <Text style={Styles.textButton}>{'Cancelar'}</Text>
+                {this.state.loadingCancelar ? <ActivityIndicator size='small' color='#ffffff' /> :
+                <Text style={Styles.textButton}>{'Cancelar'}</Text>}
               </TouchableOpacity>
             </View>
           </View>
@@ -167,7 +199,7 @@ class Detalhes extends Component {
             <DateSelector at={compromisso.at} remarcar={this.remarcar} />
           )}
 
-        </View>
+        </View></View>)}
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity, Switch } from 'react-native';
+import { View, Text, TextInput, ScrollView, TouchableOpacity, Switch, ActivityIndicator } from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
 import DocumentPicker from 'react-native-document-picker';
 import moment from 'moment';
@@ -11,6 +11,8 @@ import TiposGarantiaMock from '../../services/TiposGarantiaMock';
 
 class Formulario extends Component {
   state = {
+    loading: false,
+    loadingSend: false,
     data: null,
     hora: null,
     enderecoVisita: null,
@@ -37,9 +39,10 @@ class Formulario extends Component {
     this.idCompromisso = props.route.params.idCompromisso;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    this.setState({ loading: true });
     const compromissos = new Compromissos();
-    const dados = compromissos.getCompromissoById(this.idCompromisso);
+    const dados = await compromissos.getCompromissoById(this.idCompromisso);
 
     this.setState({
       data: dados.at,
@@ -49,7 +52,8 @@ class Formulario extends Component {
       nomeEmpresa: dados.nomeEmpresa,
       nomeContato: dados.nomeResponsavel,
       qtdParcelas: 12,
-      recomendado: true
+      recomendado: true,
+      loading: false
     });
   }
 
@@ -154,287 +158,293 @@ class Formulario extends Component {
     }
   });
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
+    this.setState({ loadingSend: true });
     const dados = this.getDataAndValidate();
     const compromissos = new Compromissos();
 
-    compromissos.finishVisit(this.idCompromisso, dados);
+    await compromissos.finishVisit(this.idCompromisso, dados);
 
-    this.props.navigation.navigate('Home');
+    this.setState({ loadingSend: false });
+    this.props.navigation.push('Home');
   }
 
   render() {
     return (
-      <ScrollView >
-        <View style={Styles.container}>
-          <View style={Styles.visitaBox}>
-            <Text style={Styles.visitaText}>Data da Visita: {moment(this.state.data).format('DD/MM/YYYY')} às {this.state.hora}</Text>
-            <Text style={Styles.visitaText}>Endereço da Visita: {this.state.enderecoVisita}</Text>
-          </View>
+      <View>
+        {this.state.loading ? <ActivityIndicator size='large' color={'#123456'} /> :
+            <ScrollView >
+              <View style={Styles.container}>
+                <View style={Styles.visitaBox}>
+                  <Text style={Styles.visitaText}>Data da Visita: {moment(this.state.data).format('DD/MM/YYYY')} às {this.state.hora}</Text>
+                  <Text style={Styles.visitaText}>Endereço da Visita: {this.state.enderecoVisita}</Text>
+                </View>
 
-          <View style={Styles.pessoaisBox}>
-            <Text style={Styles.titleBox}>Dados Pessoais</Text>
+                <View style={Styles.pessoaisBox}>
+                  <Text style={Styles.titleBox}>Dados Pessoais</Text>
 
-            <View>
-              <Text style={Styles.label}>Nome do Contato</Text>
-              <TextInput
-                value={this.state.nomeContato}
-                onChangeText={this.handleNomeContato}
-                underlineColorAndroid={'#123456'}
-                placeholder='Nome do Contato'
-                spellCheck={false}
-                maxLength={100}
-                autoCompleteType={'off'}
-                autoCapitalize={'words'}
-                multiline={false}
-                style={Styles.textInputs} />
-            </View>
+                  <View>
+                    <Text style={Styles.label}>Nome do Contato</Text>
+                    <TextInput
+                      value={this.state.nomeContato}
+                      onChangeText={this.handleNomeContato}
+                      underlineColorAndroid={'#123456'}
+                      placeholder='Nome do Contato'
+                      spellCheck={false}
+                      maxLength={100}
+                      autoCompleteType={'off'}
+                      autoCapitalize={'words'}
+                      multiline={false}
+                      style={Styles.textInputs} />
+                  </View>
 
-            <View>
-              <Text style={Styles.label}>Email</Text>
-              <TextInput
-                value={this.state.email}
-                onChangeText={this.handleEmail}
-                underlineColorAndroid={'#123456'}
-                placeholder='E-mail'
-                spellCheck={false}
-                maxLength={100}
-                autoCompleteType={'email'}
-                autoCapitalize={'none'}
-                multiline={false}
-                style={Styles.textInputs} />
-            </View>
+                  <View>
+                    <Text style={Styles.label}>Email</Text>
+                    <TextInput
+                      value={this.state.email}
+                      onChangeText={this.handleEmail}
+                      underlineColorAndroid={'#123456'}
+                      placeholder='E-mail'
+                      spellCheck={false}
+                      maxLength={100}
+                      autoCompleteType={'email'}
+                      autoCapitalize={'none'}
+                      multiline={false}
+                      style={Styles.textInputs} />
+                  </View>
 
-            <View>
-              <Text style={Styles.label}>Telefone</Text>
-              <TextInput
-                value={this.state.telefone}
-                onChangeText={this.handleTelefone}
-                underlineColorAndroid={'#123456'}
-                placeholder='Telefone'
-                spellCheck={false}
-                maxLength={11}
-                autoCompleteType={'off'}
-                autoCapitalize={'none'}
-                keyboardType={'number-pad'}
-                multiline={false}
-                style={Styles.textInputs} />
-            </View>
+                  <View>
+                    <Text style={Styles.label}>Telefone</Text>
+                    <TextInput
+                      value={this.state.telefone}
+                      onChangeText={this.handleTelefone}
+                      underlineColorAndroid={'#123456'}
+                      placeholder='Telefone'
+                      spellCheck={false}
+                      maxLength={11}
+                      autoCompleteType={'off'}
+                      autoCapitalize={'none'}
+                      keyboardType={'number-pad'}
+                      multiline={false}
+                      style={Styles.textInputs} />
+                  </View>
 
-          </View>
+                </View>
 
-          <View style={Styles.pessoaisBox}>
-            <Text style={Styles.titleBox}>Dados Empresariais</Text>
+                <View style={Styles.pessoaisBox}>
+                  <Text style={Styles.titleBox}>Dados Empresariais</Text>
 
-            <View>
-              <Text style={Styles.label}>Nome da empresa</Text>
-              <TextInput
-                value={this.state.nomeEmpresa}
-                onChangeText={this.handleEmpresa}
-                underlineColorAndroid={'#123456'}
-                placeholder='Nome da empresa'
-                spellCheck={false}
-                maxLength={100}
-                autoCompleteType={'off'}
-                autoCapitalize={'words'}
-                multiline={false}
-                style={Styles.textInputs} />
-            </View>
+                  <View>
+                    <Text style={Styles.label}>Nome da empresa</Text>
+                    <TextInput
+                      value={this.state.nomeEmpresa}
+                      onChangeText={this.handleEmpresa}
+                      underlineColorAndroid={'#123456'}
+                      placeholder='Nome da empresa'
+                      spellCheck={false}
+                      maxLength={100}
+                      autoCompleteType={'off'}
+                      autoCapitalize={'words'}
+                      multiline={false}
+                      style={Styles.textInputs} />
+                  </View>
 
-            <View>
-              <Text style={Styles.label}>CPF / CNPJ</Text>
-              <TextInput
-                value={this.state.cpfCnpj}
-                onChangeText={this.handleCpfCnpj}
-                underlineColorAndroid={'#123456'}
-                placeholder='CPF / CNPJ'
-                spellCheck={false}
-                maxLength={14}
-                autoCompleteType={'off'}
-                autoCapitalize={'none'}
-                keyboardType={'number-pad'}
-                multiline={false}
-                style={Styles.textInputs} />
-            </View>
+                  <View>
+                    <Text style={Styles.label}>CPF / CNPJ</Text>
+                    <TextInput
+                      value={this.state.cpfCnpj}
+                      onChangeText={this.handleCpfCnpj}
+                      underlineColorAndroid={'#123456'}
+                      placeholder='CPF / CNPJ'
+                      spellCheck={false}
+                      maxLength={14}
+                      autoCompleteType={'off'}
+                      autoCapitalize={'none'}
+                      keyboardType={'number-pad'}
+                      multiline={false}
+                      style={Styles.textInputs} />
+                  </View>
 
-            <View>
-              <Text style={Styles.label}>Endereço</Text>
-              <TextInput
-                value={this.state.enderecoCliente}
-                onChangeText={this.handleEnderecoCliente}
-                underlineColorAndroid={'#123456'}
-                placeholder='Endereço'
-                spellCheck={false}
-                maxLength={150}
-                autoCompleteType={'off'}
-                autoCapitalize={'words'}
-                multiline={true}
-                style={Styles.textInputs} />
-            </View>
+                  <View>
+                    <Text style={Styles.label}>Endereço</Text>
+                    <TextInput
+                      value={this.state.enderecoCliente}
+                      onChangeText={this.handleEnderecoCliente}
+                      underlineColorAndroid={'#123456'}
+                      placeholder='Endereço'
+                      spellCheck={false}
+                      maxLength={150}
+                      autoCompleteType={'off'}
+                      autoCapitalize={'words'}
+                      multiline={true}
+                      style={Styles.textInputs} />
+                  </View>
 
-          </View>
+                </View>
 
-          <View style={Styles.pessoaisBox}>
-            <Text style={Styles.titleBox}>Proposta</Text>
+                <View style={Styles.pessoaisBox}>
+                  <Text style={Styles.titleBox}>Proposta</Text>
 
-            <View>
-              <Text style={Styles.labelSelect}>Proposito do negócio</Text>
-              <MultiSelect
-                hideTags
-                items={TiposNegocioMock}
-                uniqueKey="idTipoNegocio"
-                ref={(component) => { this.multiSelect = component }}
-                onSelectedItemsChange={this.handlePropositoNegocio}
-                selectedItems={this.state.propositoNegocio}
-                selectText="Tipos de Negócios"
-                searchInputPlaceholderText="Procure..."
-                onChangeInput={ (text)=> console.log(text) }
-                tagRemoveIconColor={Colors.primaryDark}
-                tagBorderColor={Colors.primaryDark}
-                tagTextColor={Colors.primaryDark}
-                selectedItemTextColor={Colors.verdeEscuro}
-                selectedItemIconColor={Colors.verdeEscuro}
-                itemTextColor={Colors.primaryDark}
-                displayKey="nome"
-                submitButtonColor={Colors.verdeEscuro}
-                submitButtonText="Pronto!"
-              />
-            </View>
+                  <View>
+                    <Text style={Styles.labelSelect}>Proposito do negócio</Text>
+                    <MultiSelect
+                      hideTags
+                      items={TiposNegocioMock}
+                      uniqueKey="idTipoNegocio"
+                      ref={(component) => { this.multiSelect = component }}
+                      onSelectedItemsChange={this.handlePropositoNegocio}
+                      selectedItems={this.state.propositoNegocio}
+                      selectText="Tipos de Negócios"
+                      searchInputPlaceholderText="Procure..."
+                      onChangeInput={ (text)=> console.log(text) }
+                      tagRemoveIconColor={Colors.primaryDark}
+                      tagBorderColor={Colors.primaryDark}
+                      tagTextColor={Colors.primaryDark}
+                      selectedItemTextColor={Colors.verdeEscuro}
+                      selectedItemIconColor={Colors.verdeEscuro}
+                      itemTextColor={Colors.primaryDark}
+                      displayKey="nome"
+                      submitButtonColor={Colors.verdeEscuro}
+                      submitButtonText="Pronto!"
+                    />
+                  </View>
 
-            <View>
-              <Text style={Styles.label}>Valor Solicitado - R$</Text>
-              <TextInput
-                value={this.state.valorSolicitado}
-                onChangeText={this.handleValorSolicitado}
-                underlineColorAndroid={'#123456'}
-                placeholder='R$ 0,00'
-                spellCheck={false}
-                maxLength={14}
-                autoCompleteType={'off'}
-                autoCapitalize={'none'}
-                keyboardType={'number-pad'}
-                multiline={false}
-                style={Styles.textInputs} />
-            </View>
+                  <View>
+                    <Text style={Styles.label}>Valor Solicitado - R$</Text>
+                    <TextInput
+                      value={this.state.valorSolicitado}
+                      onChangeText={this.handleValorSolicitado}
+                      underlineColorAndroid={'#123456'}
+                      placeholder='R$ 0,00'
+                      spellCheck={false}
+                      maxLength={14}
+                      autoCompleteType={'off'}
+                      autoCapitalize={'none'}
+                      keyboardType={'number-pad'}
+                      multiline={false}
+                      style={Styles.textInputs} />
+                  </View>
 
-            <View>
-              <Text style={Styles.label}>Quantidade de parcelas</Text>
-              <TextInput
-                value={this.state.qtdParcelas}
-                onChangeText={this.handleQtdParcelas}
-                underlineColorAndroid={'#123456'}
-                placeholder='1'
-                spellCheck={false}
-                maxLength={3}
-                autoCompleteType={'off'}
-                autoCapitalize={'none'}
-                keyboardType={'number-pad'}
-                multiline={false}
-                style={Styles.textInputs} />
-            </View>
+                  <View>
+                    <Text style={Styles.label}>Quantidade de parcelas</Text>
+                    <TextInput
+                      value={this.state.qtdParcelas}
+                      onChangeText={this.handleQtdParcelas}
+                      underlineColorAndroid={'#123456'}
+                      placeholder='1'
+                      spellCheck={false}
+                      maxLength={3}
+                      autoCompleteType={'off'}
+                      autoCapitalize={'none'}
+                      keyboardType={'number-pad'}
+                      multiline={false}
+                      style={Styles.textInputs} />
+                  </View>
 
-            <View>
-              <Text style={Styles.labelSelect}>Tipos de Garantia</Text>
-              <MultiSelect
-                hideTags
-                items={TiposGarantiaMock}
-                uniqueKey="idTipoGarantia"
-                ref={(component) => { this.multiSelect = component }}
-                onSelectedItemsChange={this.handleTiposGarantia}
-                selectedItems={this.state.tiposGarantia}
-                selectText="Tipos de Garantias"
-                searchInputPlaceholderText="Procure..."
-                onChangeInput={ (text)=> console.log(text) }
-                tagRemoveIconColor={Colors.primaryDark}
-                tagBorderColor={Colors.primaryDark}
-                tagTextColor={Colors.primaryDark}
-                selectedItemTextColor={Colors.verdeEscuro}
-                selectedItemIconColor={Colors.verdeEscuro}
-                itemTextColor={Colors.primaryDark}
-                displayKey="nome"
-                submitButtonColor={Colors.verdeEscuro}
-                submitButtonText="Pronto!"
-              />
-            </View>
+                  <View>
+                    <Text style={Styles.labelSelect}>Tipos de Garantia</Text>
+                    <MultiSelect
+                      hideTags
+                      items={TiposGarantiaMock}
+                      uniqueKey="idTipoGarantia"
+                      ref={(component) => { this.multiSelect = component }}
+                      onSelectedItemsChange={this.handleTiposGarantia}
+                      selectedItems={this.state.tiposGarantia}
+                      selectText="Tipos de Garantias"
+                      searchInputPlaceholderText="Procure..."
+                      onChangeInput={ (text)=> console.log(text) }
+                      tagRemoveIconColor={Colors.primaryDark}
+                      tagBorderColor={Colors.primaryDark}
+                      tagTextColor={Colors.primaryDark}
+                      selectedItemTextColor={Colors.verdeEscuro}
+                      selectedItemIconColor={Colors.verdeEscuro}
+                      itemTextColor={Colors.primaryDark}
+                      displayKey="nome"
+                      submitButtonColor={Colors.verdeEscuro}
+                      submitButtonText="Pronto!"
+                    />
+                  </View>
 
-          </View>
+                </View>
 
-          <View style={Styles.pessoaisBox}>
-            <Text style={Styles.titleBox}>Conclusão</Text>
+                <View style={Styles.pessoaisBox}>
+                  <Text style={Styles.titleBox}>Conclusão</Text>
 
-            <View>
-              <Text style={Styles.label}>Recomendado</Text>
+                  <View>
+                    <Text style={Styles.label}>Recomendado</Text>
 
-              <View style={Styles.radio}>
-                <Text style={Styles.radioText}>Não</Text>
-                <Switch
-                  trackColor={{ false: Colors.error, true: Colors.verdeEscuro }}
-                  thumbColor={this.state.recomendado ? Colors.verdeEscuro : Colors.error}
-                  onValueChange={this.handleRecomendado}
-                  value={this.state.recomendado}
-                />
-                <Text style={Styles.radioText}>Sim</Text>
+                    <View style={Styles.radio}>
+                      <Text style={Styles.radioText}>Não</Text>
+                      <Switch
+                        trackColor={{ false: Colors.error, true: Colors.verdeEscuro }}
+                        thumbColor={this.state.recomendado ? Colors.verdeEscuro : Colors.error}
+                        onValueChange={this.handleRecomendado}
+                        value={this.state.recomendado}
+                      />
+                      <Text style={Styles.radioText}>Sim</Text>
+                    </View>
+                  </View>
+
+                  <View>
+                    <Text style={Styles.label}>Parecer Comercial</Text>
+                    <TextInput
+                      value={this.state.parecerComercial}
+                      onChangeText={this.handleValorSolicitado}
+                      underlineColorAndroid={'#123456'}
+                      placeholder='Parecer comercial'
+                      spellCheck={false}
+                      maxLength={300}
+                      autoCompleteType={'off'}
+                      autoCapitalize={'words'}
+                      multiline={true}
+                      style={Styles.textInputs} />
+                  </View>
+
+                  <View>
+                    <Text style={Styles.label}>Próximos passos</Text>
+                    <TextInput
+                      value={this.state.proximosPassos}
+                      onChangeText={this.handleQtdParcelas}
+                      underlineColorAndroid={'#123456'}
+                      placeholder='Próximos passos'
+                      spellCheck={false}
+                      maxLength={300}
+                      autoCompleteType={'off'}
+                      autoCapitalize={'words'}
+                      multiline={true}
+                      style={Styles.textInputs} />
+                  </View>
+
+                </View>
+
+
+                <View style={Styles.pessoaisBox}>
+                  <Text style={Styles.titleBox}>Anexos</Text>
+
+                  <View style={{ alignItems: 'center' }}>
+                    <TouchableOpacity style={Styles.buttonAnexo} onPress={this.handleAnexo}>
+                      <Text style={Styles.textButtonAnexo}>Adicionar Anexo</Text>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View style={Styles.anexoBox}>
+                    {this.state.anexos.map(anexo => (
+                      <Text style={Styles.anexos} >{anexo.nome}</Text>
+                    ))}
+                  </View>
+
+                </View>
+
+                <View>
+                  <TouchableOpacity style={Styles.button} onPress={this.handleSubmit}>
+                    {this.state.loadingSend ? <ActivityIndicator size='small' color={'#FFFFFF'}/> :
+                    <Text style={Styles.textButton}>Enviar Formulário</Text>}
+                  </TouchableOpacity>
+                </View>
+
               </View>
-            </View>
-
-            <View>
-              <Text style={Styles.label}>Parecer Comercial</Text>
-              <TextInput
-                value={this.state.parecerComercial}
-                onChangeText={this.handleValorSolicitado}
-                underlineColorAndroid={'#123456'}
-                placeholder='Parecer comercial'
-                spellCheck={false}
-                maxLength={300}
-                autoCompleteType={'off'}
-                autoCapitalize={'words'}
-                multiline={true}
-                style={Styles.textInputs} />
-            </View>
-
-            <View>
-              <Text style={Styles.label}>Próximos passos</Text>
-              <TextInput
-                value={this.state.proximosPassos}
-                onChangeText={this.handleQtdParcelas}
-                underlineColorAndroid={'#123456'}
-                placeholder='Próximos passos'
-                spellCheck={false}
-                maxLength={300}
-                autoCompleteType={'off'}
-                autoCapitalize={'words'}
-                multiline={true}
-                style={Styles.textInputs} />
-            </View>
-
-          </View>
-
-
-          <View style={Styles.pessoaisBox}>
-            <Text style={Styles.titleBox}>Anexos</Text>
-
-            <View style={{ alignItems: 'center' }}>
-              <TouchableOpacity style={Styles.buttonAnexo} onPress={this.handleAnexo}>
-                <Text style={Styles.textButtonAnexo}>Adicionar Anexo</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={Styles.anexoBox}>
-              {this.state.anexos.map(anexo => (
-                <Text style={Styles.anexos} >{anexo.nome}</Text>
-              ))}
-            </View>
-
-          </View>
-
-          <View>
-            <TouchableOpacity style={Styles.button} onPress={this.handleSubmit}>
-              <Text style={Styles.textButton}>Enviar Formulário</Text>
-            </TouchableOpacity>
-          </View>
-
-        </View>
-      </ScrollView>
+            </ScrollView>}
+      </View>
     );
   }
 }

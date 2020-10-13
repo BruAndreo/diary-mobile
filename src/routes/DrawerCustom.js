@@ -1,27 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-import Compromissos from '../app/Compromissos';
 import Colors from '../styles/Colors';
-
-function getCompromissosDoDia() {
-  const compromissos = new Compromissos();
-
-  const itens = compromissos.getCompromissosByDate(new Date());
-
-  return itens.length || 0;
-}
+import Statistics from '../lib/Statistics';
 
 function CustomDrawerContent(props) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.hello}>Olá</Text>
-        <Text style={styles.name}>Administrador</Text>
-
-        <View style={styles.compromissos}>
-          <Text style={styles.textCompromissos}>Você tem {getCompromissosDoDia()} compromissos hoje</Text>
-        </View>
+        <Text style={styles.name}>{Statistics.getUsername()}</Text>
       </View>
 
       <View style={styles.divider}></View>
