@@ -12,6 +12,7 @@ import TiposGarantiaMock from '../../services/TiposGarantiaMock';
 class Formulario extends Component {
   state = {
     loading: false,
+    loadingSend: false,
     data: null,
     hora: null,
     enderecoVisita: null,
@@ -157,12 +158,14 @@ class Formulario extends Component {
     }
   });
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
+    this.setState({ loadingSend: true });
     const dados = this.getDataAndValidate();
     const compromissos = new Compromissos();
 
-    compromissos.finishVisit(this.idCompromisso, dados);
+    await compromissos.finishVisit(this.idCompromisso, dados);
 
+    this.setState({ loadingSend: false });
     this.props.navigation.navigate('Home');
   }
 
@@ -434,7 +437,8 @@ class Formulario extends Component {
 
                 <View>
                   <TouchableOpacity style={Styles.button} onPress={this.handleSubmit}>
-                    <Text style={Styles.textButton}>Enviar Formulário</Text>
+                    {this.state.loadingSend ? <ActivityIndicator size='small' color={'#FFFFFF'}/> :
+                    <Text style={Styles.textButton}>Enviar Formulário</Text>}
                   </TouchableOpacity>
                 </View>
 

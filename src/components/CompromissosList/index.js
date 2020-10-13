@@ -46,7 +46,6 @@ class CompromissosList extends Component {
     }
 
     this.setState({ loading: false });
-
   }
 
   render() {

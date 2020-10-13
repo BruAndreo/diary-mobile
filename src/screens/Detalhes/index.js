@@ -102,7 +102,7 @@ class Detalhes extends Component {
     this.setState({ loadingCancelar: true });
     const compromisso = new Compromissos();
 
-    Alert.alert('Confirmar Cancelamento', `Você deseja cancelar esta ${this.getTypeString()} `, [
+    Alert.alert('Confirmar Cancelamento', `Você deseja cancelar esta ${this.getTypeString()}?`, [
       {
         text: 'Não cancelar',
         onPress: () => this.setState({ loadingCancelar: false })
@@ -114,7 +114,7 @@ class Detalhes extends Component {
           await compromisso.cancelCompromisso(this.idCompromisso);
 
           this.setState({ loadingCancelar: false });
-          this.props.navigation.navigate('Home');
+          this.props.navigation.push('Home');
         }
       }
     ], {cancelable: false});

@@ -12,7 +12,7 @@ class Compromissos {
       id: compromisso.id,
       type: compromisso.tipo.descricao === 'Visita' ? TypesCompromissos.VISIT : TypesCompromissos.MEETING,
       at: moment(compromisso.dataAgendamento),
-      hour: moment(compromisso.dataAgendamento).format('hh:mm'),
+      hour: moment(compromisso.dataAgendamento).format('HH:mm'),
       nomeEmpresa: compromisso.nomeEmpresa || 'N/A',
       nomeResponsavel: compromisso.endereco.pessoa.Nome,
       address: {
@@ -61,7 +61,7 @@ class Compromissos {
     }
 
     //return compromissos.filter(compromisso => compromisso.status === StatusCompromissos.PENDING);
-    return compromissos.filter(compromisso => compromisso.status === StatusCompromissos.PENDING);
+    return compromissos.filter(compromisso => compromisso.status === StatusCompromissos.PENDING).sort((a, b) => a.at - b.at);
   }
 
   async getCompromissosByDate(date) {
@@ -102,7 +102,13 @@ class Compromissos {
     const compromisso = await this.getCompromissoById(idCompromisso);
 
     compromisso.form = form;
-    compromisso.status = StatusCompromissos.WAIT;
+    compromisso.status = StatusCompromissos.SENDED;
+
+    try {
+      await Axios.post(`https://apidiary.herokuapp.com/v1/compromissos/${idCompromisso}/finalizar?token=${Token.getToken()}`);
+    } catch (error) {
+      console.error(error);
+    }
 
     return;
   }
