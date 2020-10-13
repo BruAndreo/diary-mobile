@@ -14,7 +14,7 @@ class Compromissos {
       at: moment(compromisso.dataAgendamento),
       hour: moment(compromisso.dataAgendamento).format('HH:mm'),
       nomeEmpresa: compromisso.nomeEmpresa || 'N/A',
-      nomeResponsavel: compromisso.endereco.pessoa.Nome,
+      nomeResponsavel: compromisso.nomeContato || compromisso.endereco.pessoa.Nome,
       address: {
         cep: compromisso.endereco.nro_CEP,
         street: compromisso.endereco.logradouro,

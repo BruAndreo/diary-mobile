@@ -166,7 +166,7 @@ class Formulario extends Component {
     await compromissos.finishVisit(this.idCompromisso, dados);
 
     this.setState({ loadingSend: false });
-    this.props.navigation.navigate('Home');
+    this.props.navigation.push('Home');
   }
 
   render() {

@@ -49,7 +49,7 @@ class Detalhes extends Component {
   }
 
   getEndereco(address) {
-    return `${address.street}, ${address.number} - ${address.cep} \n ${address.city}/${address.uf}`;
+    return `${address.street}, ${address.number} \n ${address.cep} ${address.city}/${address.uf}`;
   }
 
   handleIniciarRota() {
@@ -94,7 +94,7 @@ class Detalhes extends Component {
 
     Alert.alert('Compromisso atualizado!', `${this.getTypeString()} foi remarcada com sucesso.`, [{
       text: 'OK',
-      onPress: () => this.props.navigation.navigate('Home')
+      onPress: () => this.props.navigation.push('Home')
     }], {cancelable: false});
   }
 
