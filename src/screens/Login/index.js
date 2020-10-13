@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, TextInput, TouchableOpacity, Text, StatusBar } from 'react-native';
+import { View, Image, TextInput, TouchableOpacity, Text, StatusBar, ActivityIndicator } from 'react-native';
 import { Styles } from './Style';
 import Screens from '../../lib/Screens';
 import Authentication from '../../app/Authentication';
@@ -16,7 +16,8 @@ class Login extends Component {
     login: '',
     password: '',
     error: false,
-    errorMsg: ''
+    errorMsg: '',
+    loading: false
   };
 
   handleUserInput = text => {
@@ -35,6 +36,7 @@ class Login extends Component {
 
   loginClicked = async () => {
     try {
+      this.setState({ loading: true });
       this.validateInputs();
 
       let logged = await Authentication.authenticate(this.state.login, this.state.password);
@@ -48,6 +50,9 @@ class Login extends Component {
         error: true,
         errorMsg: e.message
       });
+    }
+    finally {
+      this.setState({ loading: false });
     }
   };
 
@@ -77,7 +82,8 @@ class Login extends Component {
           />
 
           <TouchableOpacity style={Styles.button} onPress={this.loginClicked}>
-            <Text style={Styles.textButton}>Entrar</Text>
+            {this.state.loading? <ActivityIndicator size="small" color={'#ffffff'} /> :
+            <Text style={Styles.textButton}>Entrar</Text>}
           </TouchableOpacity>
 
           <Text style={Styles.msgErro}>{this.state.errorMsg}</Text>
