@@ -1,20 +1,42 @@
 import moment from 'moment';
 import CompromissosDoDiaMock from '../services/CompromissosDoDiaMock';
 import StatusCompromissos from '../lib/StatusCompromissos';
+import Axios from 'axios';
+import Token from '../lib/Token';
 
 class Compromissos {
 
-  getCompromissos(type = null) {
-    let compromissos = CompromissosDoDiaMock;
+  async getCompromissos(type = null) {
+    let compromissos = [];
 
-    if (type) {
-      compromissos = this.getCompromissosByType(type);
+    try {
+      const response = await Axios.get(`https://apidiary.herokuapp.com/v1/compromissos-semana?token=${Token.getToken()}`);
+
+      compromissos = response.data.compromissos;
+
+      console.log(Object.keys(compromissos[0]));
+    } catch (error) {
+      console.error(error);
+      compromissos = CompromissosDoDiaMock;
+    }
+    finally {
+      if (compromissos.length <= 0) {
+        compromissos = CompromissosDoDiaMock;
+      }
     }
 
-    return compromissos.filter(compromisso => compromisso.status === StatusCompromissos.PENDING);
+
+    if (type) {
+      compromissos = compromissos.filter(compromisso => compromisso.type === type);
+    }
+
+    //return compromissos.filter(compromisso => compromisso.status === StatusCompromissos.PENDING);
+    return compromissos;
   }
 
-  getCompromissosByDate(date) {
+  async getCompromissosByDate(date) {
+    await this.getCompromissos();
+
     const dt = moment(date);
 
     return CompromissosDoDiaMock.filter(compromisso => dt.isSame(compromisso.at, 'day'));

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Token from '../lib/Token';
 
 class Authentication {
 
@@ -6,7 +7,7 @@ class Authentication {
     try {
       const dados = await axios.post('https://apidiary.herokuapp.com/v1/authenticate', {}, { auth: { username, password } });
 
-      console.info(dados.data.token);
+      Token.setToken(dados.data.token);
 
       return true;
     } catch (error) {

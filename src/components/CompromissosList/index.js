@@ -23,23 +23,23 @@ class CompromissosList extends Component {
     this.setCompromissos = this.setCompromissos.bind(this);
   }
 
-  componentDidMount() {
-    this.setCompromissos(this.props.type);
+  async componentDidMount() {
+    await this.setCompromissos(this.props.type);
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     if (prevProps.date !== this.props.date) {
-      this.setCompromissos();
+      await this.setCompromissos();
     }
   }
 
-  setCompromissos(type = null) {
+  async setCompromissos(type = null) {
     const compromissos = new Compromissos();
 
     if (!type) {
-      this.setState({ compromissos: compromissos.getCompromissosByDate(this.props.date) });
+      this.setState({ compromissos: await compromissos.getCompromissosByDate(this.props.date) });
     } else {
-      this.setState({ compromissos: compromissos.getCompromissos(type) });
+      this.setState({ compromissos: await compromissos.getCompromissos(type) });
     }
 
   }
